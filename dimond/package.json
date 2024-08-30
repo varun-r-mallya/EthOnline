@@ -21,6 +21,7 @@
     "@web3auth/passkeys-sfa-plugin": "^8.1.0",
     "@web3auth/single-factor-auth": "^8.1.1",
     "@web3auth/wallet-services-plugin": "^8.12.5",
+    "axios": "^1.7.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "ethers": "^6.13.2",

@@ -5,6 +5,7 @@ import { CarTaxiFront, Wallet, LogOut, MessageCircle } from 'lucide-react';
 import { useState, useEffect } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { useRouter } from "next/navigation";
+import AttestationQuery from '../../components/AttestationQuery';
 
 
 const Layout = ({ children }: any) => {
@@ -59,6 +60,7 @@ const Layout = ({ children }: any) => {
             <Wallet className="mr-2 h-4 w-4" />
             View Wallet
           </Button>
+          <AttestationQuery/>
           <Button variant="ghost" className="text-gray-400 hover:text-black" onClick={handleLogout}>
             <LogOut className="mr-2 h-4 w-4" />
             Logout
