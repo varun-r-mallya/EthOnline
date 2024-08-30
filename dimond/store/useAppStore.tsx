@@ -59,7 +59,7 @@ interface AppState {
   loginWithPasskey: () => Promise<void>;
   getUserInfo: () => Promise<any>;
   logout: () => Promise<void>;
-  getAccounts: () => Promise<void>;
+  getAccounts: () => Promise<string>;
   getBalance: () => Promise<void>;
   signMessage: () => Promise<void>;
   sendTransaction: () => Promise<void>;
@@ -198,15 +198,16 @@ export const useAppStore = create<AppState>((set) => ({
     web3authSFAuth.logout();
   },
 
-  getAccounts: async () => {
+  getAccounts: async (): Promise<string> => {
     const { provider } = useAppStore.getState();
     if (!provider) {
       console.error("No provider found");
-      return;
+      return "";
     }
     const rpc = new RPC(provider);
     const userAccount = await rpc.getAccounts();
     console.log(userAccount);
+    return userAccount;
   },
 
   getBalance: async () => {

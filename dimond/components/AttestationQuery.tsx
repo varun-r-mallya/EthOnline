@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAppStore } from "@/store/useAppStore";
+import { useRouter } from "next/navigation";
 
 declare global {
   interface Window {
@@ -7,32 +9,50 @@ declare global {
   }
 }
 
-const AttestationQuery = () => {
+const AttestationQuery = ({address}: any) => {
   const [signer, setSigner] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Function to connect to MetaMask and get the user's address
-    const getMetamaskAddress = async () => {
-      if (window.ethereum) {
-        try {
-          const accounts = await (window.ethereum.request({ method: 'eth_requestAccounts' }) as Promise<string[]>);
-          if (accounts.length > 0) {
-            setSigner(accounts[0]);
-          } else {
-            setError('No MetaMask account found.');
-          }
-        } catch (err) {
-          setError('Failed to connect to MetaMask.');
-        }
-      } else {
-        setError('MetaMask not found.');
-      }
-    };
 
-    getMetamaskAddress();
+  const router = useRouter();
+  const {
+    web3authSFAuth,
+    provider,
+    pkPlugin,
+    wsPlugin,
+    isLoggingIn,
+    initWeb3Auth,
+    onSuccess,
+    loginWithPasskey,
+    getUserInfo,
+    logout,
+    getAccounts,
+    getBalance,
+    signMessage,
+    sendTransaction,
+    authenticateUser,
+    addChain,
+    switchChain,
+    registerPasskey,
+    listAllPasskeys,
+    showCheckout,
+    showWalletUI,
+    showWalletScanner,
+  } = useAppStore();
+
+  useEffect(() => {
+    initWeb3Auth();
   }, []);
+
+
+  useEffect(() => {
+    if (web3authSFAuth) {
+      getAccounts().then((data) => {
+        setSigner(data);
+      });
+    }
+  }, [web3authSFAuth]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
