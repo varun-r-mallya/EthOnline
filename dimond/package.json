@@ -12,7 +12,9 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-switch": "^1.1.0",
     "@react-oauth/google": "^0.12.1",
+    "@shadcn/ui": "^0.0.4",
     "@web3auth/base": "^8.12.4",
     "@web3auth/ethereum-provider": "^8.12.4",
     "@web3auth/modal": "^8.12.6",
@@ -26,9 +28,12 @@
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
+    "solid-app-router": "^0.4.2",
+    "switch": "^0.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "web-vitals": "^4.2.3"
+    "web-vitals": "^4.2.3",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@types/node": "^20",

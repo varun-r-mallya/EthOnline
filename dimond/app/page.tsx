@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CarFront, ChevronRight } from "lucide-react";
-import { redirect } from "next/dist/server/api-utils";
 
 const HomePage = () => {
   return (
@@ -11,7 +10,7 @@ const HomePage = () => {
         <div className="text-center mb-8">
           <CarFront size={64} className="text-yellow-400 inline-block mb-4" />
           <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
-            Dimond
+            ZeroCabs
           </h1>
         </div>
 
@@ -53,7 +52,7 @@ const HomePage = () => {
       </div>
 
       <footer className="mt-12 text-center text-gray-500 text-sm">
-        © 2024 Dimond. All rights reserved.
+        © 2024 ZeroCabs. All rights reserved.
       </footer>
     </div>
   );
