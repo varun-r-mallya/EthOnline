@@ -26,28 +26,10 @@ function App() {
   const {
     web3authSFAuth,
     provider,
-    pkPlugin,
-    wsPlugin,
     isLoggingIn,
     initWeb3Auth,
     onSuccess,
     loginWithPasskey,
-    getUserInfo,
-    logout,
-    getAccounts,
-    getBalance,
-    signMessage,
-    sendTransaction,
-    authenticateUser,
-    addChain,
-    switchChain,
-    registerPasskey,
-    listAllPasskeys,
-    showCheckout,
-    showWalletUI,
-    showWalletScanner,
-    // isAuthenticated,
-    // login
   } = useAppStore();
 
   const router = useRouter();
@@ -122,7 +104,7 @@ function App() {
                 className="flex-grow-0 flex-shrink-0"
                 preserveAspectRatio="none"
               >
-                <path d="M2 1.5L9 9L2 16.5" stroke="black" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M2 1.5L9 9L2 16.5" stroke="black" strokeWidth="3" strokeLinecap="round"></path>
               </svg>
             </Button>
           </div>

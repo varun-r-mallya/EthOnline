@@ -25,9 +25,9 @@ export const ElipseCentre: React.FC = () => {
                         width="658.8"
                         height="664.8"
                         filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB"
+                        colorInterpolationFilters="sRGB"
                     >
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
                         <feGaussianBlur stdDeviation="129.95" result="effect1_foregroundBlur_4_30"></feGaussianBlur>
                     </filter>
@@ -62,9 +62,9 @@ export const ElipseRight: React.FC = () => {
                         width="2393.2"
                         height="2412.2"
                         filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB"
+                        colorInterpolationFilters="sRGB"
                     >
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
                         <feGaussianBlur stdDeviation="485.05" result="effect1_foregroundBlur_4_11"></feGaussianBlur>
                     </filter>
@@ -97,9 +97,9 @@ export const ElipseLeft: React.FC = () => {
                         width="2195.2"
                         height="2206.2"
                         filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB"
+                        colorInterpolationFilters="sRGB"
                     >
-                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
                         <feGaussianBlur stdDeviation="485.05" result="effect1_foregroundBlur_5_80"></feGaussianBlur>
                     </filter>

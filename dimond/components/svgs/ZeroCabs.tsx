@@ -15,8 +15,8 @@ const ZeroCabs: React.FC = () => {
                 <path
                     d="M2.90306 1.99145L12.1593 1.99145C13.4484 1.99145 13.9581 3.66082 12.8889 4.38092L3.98489 10.3775C2.91564 11.0976 3.42537 12.767 4.71449 12.767L14.1512 12.767"
                     stroke="#BAFD02"
-                    stroke-width="3.91837"
-                    stroke-linecap="round"
+                    strokeWidth="3.91837"
+                    strokeLinecap="round"
                 ></path>
             </svg>
         </>

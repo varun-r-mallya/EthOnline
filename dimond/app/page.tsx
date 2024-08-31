@@ -25,7 +25,7 @@ const HomePage = () => {
 
       <NavBar />
 
-      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
+        <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
         <p className="text-7xl font-semibold text-center text-white">
           <span className="text-7xl font-semibold text-center text-white">Welcome to the future</span
           ><br /><span className="text-7xl font-semibold text-center text-white">of ride sharing.</span>
@@ -50,11 +50,11 @@ const HomePage = () => {
               className="absolute left-[210px] top-[22px]"
               preserveAspectRatio="none"
             >
-              <path d="M2 2L9 9.5L2 17" stroke="black" stroke-width="3" stroke-linecap="round"></path>
+              <path d="M2 2L9 9.5L2 17" stroke="black" strokeWidth="3" strokeLinecap="round"></path>
             </svg>
           </a>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="flex gap-8">
           <div
             className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
           >

@@ -16,10 +16,10 @@ const Divider: React.FC = () => {
                 <path
                     d="M1 1H293"
                     stroke="#3F3F3F"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-dasharray="1 8"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeDasharray="1 8"
                 ></path>
             </svg>
         </>
