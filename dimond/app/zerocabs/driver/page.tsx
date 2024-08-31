@@ -9,9 +9,12 @@ const DriverPage = () => {
       <div className="max-w-4xl mx-auto space-y-6 ">
         <Card className="bg-gray-800 border-gray-700 text-gray-50">
           <CardHeader>
-            <CardTitle className="text-xl flex items-center">
+            <CardTitle className="text-xl flex items-center justify-between">
+              <div className="text-xl flex items-center">
               <Car className="mr-2 text-yellow-400" />
               Driver Dashboard
+              </div>
+              <Button>Verify documents</Button>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
