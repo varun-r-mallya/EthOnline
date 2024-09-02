@@ -8,6 +8,8 @@ import Opacity from "@/components/svgs/Opacity";
 import { ElipseCentre, ElipseLeft, ElipseRight } from "@/components/svgs/Elipse";
 import { NavBar } from "@/components/basic/NavBar";
 import { Footer } from "@/components/basic/Footer";
+import { motion } from "framer-motion";
+
 
 const HomePage = () => {
   return (
@@ -25,7 +27,7 @@ const HomePage = () => {
 
       <NavBar />
 
-        <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
+      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
         <p className="text-7xl font-semibold text-center text-white">
           <span className="text-7xl font-semibold text-center text-white">Welcome to the future</span
           ><br /><span className="text-7xl font-semibold text-center text-white">of ride sharing.</span>
@@ -37,45 +39,43 @@ const HomePage = () => {
           >powered by blockchain technology.</span
           >
         </p>
-        <div className="w-[259px] h-[63px] relative overflow-hidden rounded-[10px] bg-[#bafd02] cursor-pointer">
+        <div className="w-[259px] h-[63px] relative overflow-hidden rounded-[10px] bg-[#bafd02] cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#a5e002] hover:shadow-lg hover:scale-105 group">
           <a href="/login">
 
-            <p className="absolute left-14 top-[17px] text-xl font-medium text-left text-black cursor-pointer">Get Started</p>
-            <svg
-              width="12"
-              height="19"
-              viewBox="0 0 12 19"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="absolute left-[210px] top-[22px]"
-              preserveAspectRatio="none"
-            >
+            <p className="absolute left-14 top-1/2 transform -translate-y-1/2 text-xl font-medium text-left text-black transition-all duration-300 ease-in-out group-hover:left-12">
+              Get Started </p>        <svg
+                width="12"
+                height="19"
+                viewBox="0 0 12 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="absolute left-[210px] top-[22px]"
+                preserveAspectRatio="none"
+              >
               <path d="M2 2L9 9.5L2 17" stroke="black" strokeWidth="3" strokeLinecap="round"></path>
             </svg>
           </a>
         </div>
         <div className="flex gap-8">
-          <div
+          <motion.div
             className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
-            <div
-              className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]"
-            >
+            <div className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]">
               <DecentralizedNetwork />
-
-              <p
-                className="self-stretch flex-grow-0 flex-shrink-0 w-[139px] text-xl font-medium text-left text-[#bafd02]"
-              >
+              <p className="self-stretch flex-grow-0 flex-shrink-0 w-[139px] text-xl font-medium text-left text-[#bafd02]">
                 Decentralized
               </p>
             </div>
-            <p
-              className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]"
-            >
-              No central authority. Every transaction is peer-to-peer, ensuring security in ride.    </p>
-          </div>
-          <div
+            <p className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]">
+              No central authority. Every transaction is peer-to-peer, ensuring security in ride.
+            </p>
+          </motion.div>
+          <motion.div
             className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <div
               className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]"
@@ -92,9 +92,11 @@ const HomePage = () => {
               className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]"
             >
               Ride with confidence. Your data is securely encrypted on the blockchain.     </p>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <div
               className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]"
@@ -110,7 +112,7 @@ const HomePage = () => {
               className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]"
             >
               No hidden fees. Fair pricing that benefits both drivers and riders.     </p>
-          </div>
+          </motion.div>
         </div>
       </main>
 

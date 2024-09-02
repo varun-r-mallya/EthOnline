@@ -4,8 +4,12 @@ import { useRouter } from "next/navigation";
 
 import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-
+import { motion } from "framer-motion"
 export const NavBar: React.FC = () => {
+    const [selected, setSelected] = useState<number | null>(null);
+
+    const navItems = ["Home", "About", "Contact"];
+    const sliderWidth = 50;
     const router = useRouter();
     const {
         web3authSFAuth,
@@ -36,7 +40,7 @@ export const NavBar: React.FC = () => {
     return (
         <>
             <nav className="p-4">
-                <div className="container mx-auto flex justify-between items-center">
+                <div className="flex w-100% px-[138px] py-[40px] items-center justify-between">
                     <a href="/">
                         <div className="flex items-center">
                             <CarFront size={32} className="text-yellow-400 mr-2" />
@@ -55,12 +59,26 @@ export const NavBar: React.FC = () => {
                             </svg>
                         </div>
                     </a>
-                    <div className="hidden md:flex space-x-4 cursor-pointer">
-                        <a href="/" ><p className="text-xl font-light text-left text-white cursor-pointer">Home</p></a>
-                        <a href="/about"><p className="text-xl font-light text-left text-white cursor-pointer">About</p></a>
-                        <a href="/contact"><p className="text-xl font-light text-left text-white cursor-pointer">Contact</p></a>
-                    </div>
-
+                    <ul className="flex space-x-[2.93rem] font-mono text-lg">
+                        <li className="relative navitem group cursor-pointer ">
+                            <a href="/" className="relative">
+                                Home
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-transparent transition-all duration-700 ease-in-out group-hover:w-full group-hover:bg-[#bafd02]"></span>
+                            </a>
+                        </li>
+                        <li className="relative navitem group cursor-pointer  ">
+                            <a href="/about" className="relative">
+                                About
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-transparent transition-all duration-700 ease-in-out group-hover:w-full group-hover:bg-[#bafd02]"></span>
+                            </a>
+                        </li>
+                        <li className="relative navitem group cursor-pointer">
+                            <a href="/contact" className="relative">
+                                Contact
+                                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-transparent transition-all duration-700 ease-in-out group-hover:w-full group-hover:bg-[#bafd02]"></span>
+                            </a>
+                        </li>
+                    </ul>
                     {web3authSFAuth ? (provider ? (<>
                         <div className="flex items-center space-x-1">
                             <div className="relative">
