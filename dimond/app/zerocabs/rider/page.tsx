@@ -40,7 +40,7 @@ const ClientPage = () => {
                 className="flex-grow-0 flex-shrink-0"
                 preserveAspectRatio="none"
               >
-                <path d="M2 1.5L9 9L2 16.5" stroke="black" stroke-width={3} stroke-linecap="round" />
+                <path d="M2 1.5L9 9L2 16.5" stroke="black" strokeWidth={3} strokeLinecap="round" />
               </svg>
             </div>
             <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-[19px] px-6 py-3 rounded-[10px] border border-white hover:bg-[#87b509] cursor-pointer text-[#ccc] hover:text-black">
@@ -74,10 +74,10 @@ const ClientPage = () => {
             <path
               d="M1 1L482 1.00004"
               stroke="#3F3F3F"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-dasharray="1 8"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray="1 8"
             ></path>
           </svg>
           <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative">
@@ -136,10 +136,10 @@ const ClientPage = () => {
               <path
                 d="M1 1L482 1.00004"
                 stroke="#3F3F3F"
-                stroke-width={2}
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-dasharray="1 8"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray="1 8"
               />
             </svg>
             <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative">
@@ -169,7 +169,7 @@ const ClientPage = () => {
             className="flex-grow-0 flex-shrink-0"
             preserveAspectRatio="none"
           >
-            <path d="M17 9.5L9 1.5L1 9.5" stroke="white" stroke-width={2} stroke-linecap="round" />
+            <path d="M17 9.5L9 1.5L1 9.5" stroke="white" strokeWidth={2} strokeLinecap="round" />
           </svg>
         </div>
 

@@ -77,10 +77,10 @@ const DriverPage = () => {
             <path
               d="M1 1L482 1.00004"
               stroke="#3F3F3F"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-dasharray="1 8"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray="1 8"
             ></path>
           </svg>
           <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative">
@@ -159,7 +159,7 @@ const DriverPage = () => {
               <path
                 d="M14.7818 1.36797L17.7965 10.6461L17.8914 10.9382H18.1985H27.9541L20.0617 16.6725L19.8132 16.853L19.9081 17.1451L22.9228 26.4232L15.0303 20.689L14.7818 20.5085L14.5333 20.689L6.64086 26.4232L9.65552 17.1451L9.75043 16.853L9.50196 16.6725L1.60948 10.9382H11.3651H11.6722L11.7672 10.6461L14.7818 1.36797Z"
                 stroke="white"
-                stroke-width="0.845455"
+                strokeWidth="0.845455"
               ></path>
             </svg>
           </div>(110 reviews)
@@ -204,10 +204,10 @@ const DriverPage = () => {
               <path
                 d="M1 1L482 1.00004"
                 stroke="#3F3F3F"
-                stroke-width={2}
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-dasharray="1 8"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray="1 8"
               />
             </svg>
             <p className="self-stretch flex-grow-0 flex-shrink-0 w-[483px] text-xl font-medium text-left text-[#bababa]">
@@ -232,7 +232,7 @@ const DriverPage = () => {
             className="flex-grow-0 flex-shrink-0"
             preserveAspectRatio="none"
           >
-            <path d="M17 9.5L9 1.5L1 9.5" stroke="white" stroke-width={2} stroke-linecap="round" />
+            <path d="M17 9.5L9 1.5L1 9.5" stroke="white" strokeWidth={2} strokeLinecap="round" />
           </svg>
         </div>
 
