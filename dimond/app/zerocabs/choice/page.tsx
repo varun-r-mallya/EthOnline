@@ -5,6 +5,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CarTaxiFront, User, Shield, ArrowLeft } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { useEffect, useState } from "react";
+import { Car, Security, Steering } from "@/components/svgs/choicePage";
+import { log } from "console";
+import {motion} from 'framer-motion'
+
 const RoleChoicePage = () => {
   const {
     web3authSFAuth,
@@ -44,14 +48,12 @@ const RoleChoicePage = () => {
     }
   }, [web3authSFAuth]);
 
-  
-
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4">
-      <h1 className="text-4xl font-bold text-gray-50 mb-4">
+    <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
+      <p className="text-7xl font-semibold text-center text-white mb-16">
         Welcome {userInfo?.name}!
-      </h1>
-      <Card className="w-full max-w-md bg-gray-800 border-gray-700">
+      </p>
+      {/* <Card className="w-full max-w-md bg-gray-800 border-gray-700">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
             <CarTaxiFront size={32} className="text-yellow-400 mr-2" />
@@ -66,48 +68,115 @@ const RoleChoicePage = () => {
         <CardContent className="space-y-4">
           <br />
           <a href="/zerocabs/rider">
-          <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
-            <User size={24} className="mr-4" />
-            <div className="text-left">
-              <div className="font-bold">Rider</div>
-              <div className="text-xs opacity-75">
-                Request a ride to your destination
+            <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
+              <User size={24} className="mr-4" />
+              <div className="text-left">
+                <div className="font-bold">Rider</div>
+                <div className="text-xs opacity-75">
+                  Request a ride to your destination
+                </div>
               </div>
-            </div>
-          </Button>
+            </Button>
           </a>
           <br />
           <a href="/zerocabs/driver">
-          <Button className="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
-            <CarTaxiFront size={24} className="mr-4" />
-            <div className="text-left">
-              <div className="font-bold">Driver</div>
-              <div className="text-xs opacity-75">
-                Offer rides and earn crypto
+            <Button className="w-full bg-gradient-to-r from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
+              <CarTaxiFront size={24} className="mr-4" />
+              <div className="text-left">
+                <div className="font-bold">Driver</div>
+                <div className="text-xs opacity-75">
+                  Offer rides and earn crypto
+                </div>
               </div>
-            </div>
-          </Button>
+            </Button>
           </a>
           <br />
           <a href="/zerocabs/responder">
-          <Button className="w-full bg-gradient-to-r from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
-            <Shield size={24} className="mr-4" />
-            <div className="text-left">
-              <div className="font-bold">Emergency Responder</div>
-              <div className="text-xs opacity-75">
-                Provide emergency response services
+            <Button className="w-full bg-gradient-to-r from-blue-400 to-indigo-500 hover:from-blue-500 hover:to-indigo-600 text-gray-900 font-semibold h-16 flex items-center justify-start px-4">
+              <Shield size={24} className="mr-4" />
+              <div className="text-left">
+                <div className="font-bold">Emergency Responder</div>
+                <div className="text-xs opacity-75">
+                  Provide emergency response services
+                </div>
               </div>
-            </div>
-          </Button>
+            </Button>
           </a>
         </CardContent>
-      </Card>
-  
+      </Card> */}
+      <div className="flex justify-start items-start gap-[19px]">
+      <motion.div
+            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+          <a href="/zerocabs/rider">
+            <div
+              className="flex flex-col justify-start items-center gap-2"
+            >
+              <Car />
+              <p
+                className="text-[32px] font-semibold text-center text-[#bafd02]"
+              >
+                Book Ride
+              </p>
+            </div>
+            <p
+              className="text-lg font-extralight text-center text-[#bcbcbc]"
+            >
+              Request a ride to your destination.
+            </p></a>
+        </motion.div>
+   
 
-      <footer className="mt-8 text-center text-gray-500 text-sm">
-        © 2024 ZeroCabs. All rights reserved.
-      </footer>
-    </div>
+        <motion.div
+            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+          <a href="/zerocabs/driver">
+
+            <div
+              className="flex flex-col justify-start items-center gap-2"
+            >
+              <Steering />            <p
+                className="text-[32px] font-semibold text-center text-[#bafd02]"
+              >
+                Drive
+              </p>
+            </div>
+            <p
+              className="text-lg font-extralight text-center text-[#bcbcbc]"
+            >
+              Offer rides and earn crypto
+            </p></a>
+        </motion.div>
+
+        <motion.div
+            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+          <a href="/zerocabs/responder">
+
+            <div
+              className="flex flex-col justify-start items-center gap-2"
+            >
+              <Security />            <p
+                className="text-2xl font-semibold text-center text-[#bafd02]"
+              >
+                Emergency Responder
+              </p>
+            </div>
+            <p
+              className="text-lg font-extralight text-center text-[#bcbcbc]"
+            >
+              Provide emergency response services
+            </p></a>
+        </motion.div>
+      </div>
+
+    </main>
   );
 };
 

@@ -1,59 +1,139 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CarFront, ChevronRight } from "lucide-react";
+import {
+  CarFront,
+  ChevronRight,
+  Eye,
+  Menu,
+  Network,
+  Shield,
+} from "lucide-react";
+import DecentralizedNetwork from "@/components/svgs/DecentralizedNetwork";
+import Secure from "@/components/svgs/Secure";
+import Opacity from "@/components/svgs/Opacity";
+import {
+  ElipseCentre,
+  ElipseLeft,
+  ElipseRight,
+} from "@/components/svgs/Elipse";
+import { NavBar } from "@/components/basic/NavBar";
+import { Footer } from "@/components/basic/Footer";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col justify-center items-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <CarFront size={64} className="text-yellow-400 inline-block mb-4" />
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
-            ZeroCabs
-          </h1>
-        </div>
-
-        <Card className="bg-gray-800 border-gray-700">
-          <CardHeader>
-            <CardTitle className="text-xl text-center text-gray-100">
-              Welcome to the future of ride-sharing
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <p className="text-center text-gray-400">
-              Experience decentralized transportation powered by blockchain
-              technology.
-            </p>
-            <br />
-            <a href="/login">
-              <Button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 font-semibold">
-                Login
-                <ChevronRight className="ml-2 h-4 w-4" />
-              </Button>
-            </a>
-          </CardContent>
-        </Card>
-
-        <div className="mt-8 grid grid-cols-3 gap-4 text-center text-sm">
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">Decentralized</h3>
-            <p className="text-gray-400">No central authority</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">Secure</h3>
-            <p className="text-gray-400">Blockchain-powered</p>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg">
-            <h3 className="font-semibold mb-2">Transparent</h3>
-            <p className="text-gray-400">Fair pricing</p>
-          </div>
-        </div>
+    <div className="relative min-h-screen bg-[#070C0F] text-gray-100 flex flex-col overflow-hidden">
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+        <ElipseCentre />
+      </div>
+      <div className="absolute right-0 flex items-center">
+        <ElipseRight />
       </div>
 
-      <footer className="mt-12 text-center text-gray-500 text-sm">
-        © 2024 ZeroCabs. All rights reserved.
-      </footer>
+      <div className="absolute top-0 left-0 flex items-center">
+        <ElipseLeft />
+      </div>
+
+      <NavBar />
+
+      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
+        <p className="text-7xl font-semibold text-center text-white">
+          <span className="text-7xl font-semibold text-center text-white">
+            Welcome to the future
+          </span>
+          <br />
+          <span className="text-7xl font-semibold text-center text-white">
+            of ride sharing.
+          </span>
+        </p>
+        <p className="text-2xl font-light text-center text-[#8d8d8d]">
+          <span className="text-2xl font-light text-center text-[#8d8d8d]">
+            Experience decentralized transportation
+          </span>
+          <br />
+          <span className="text-2xl font-light text-center text-[#8d8d8d]">
+            powered by blockchain technology.
+          </span>
+        </p>
+        <a href="/login">
+          <div className="w-[259px] h-[63px] relative overflow-hidden rounded-[10px] bg-[#bafd02] cursor-pointer transition-all duration-300 ease-in-out hover:bg-[#a5e002] hover:shadow-lg hover:scale-105 group">
+            <p className="absolute left-14 top-1/2 transform -translate-y-1/2 text-xl font-medium text-left text-black transition-all duration-300 ease-in-out group-hover:left-12">
+              Get Started{" "}
+            </p>{" "}
+            <svg
+              width="12"
+              height="19"
+              viewBox="0 0 12 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute left-[210px] top-[22px]"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M2 2L9 9.5L2 17"
+                stroke="black"
+                strokeWidth="3"
+                strokeLinecap="round"
+              ></path>
+            </svg>
+          </div>
+        </a>
+        <div className="flex gap-8">
+          <motion.div
+            className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]">
+              <DecentralizedNetwork />
+              <p className="self-stretch flex-grow-0 flex-shrink-0 w-[139px] text-xl font-medium text-left text-[#bafd02]">
+                Decentralized
+              </p>
+            </div>
+            <p className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]">
+              No central authority. Every transaction is peer-to-peer, ensuring
+              security in ride.
+            </p>
+          </motion.div>
+          <motion.div
+            className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]">
+              <Secure />
+
+              <p className="self-stretch flex-grow-0 flex-shrink-0 w-[139px] text-xl font-medium text-center text-[#bafd02]">
+                Secure
+              </p>
+            </div>
+            <p className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]">
+              Ride with confidence. Your data is securely encrypted on the
+              blockchain.{" "}
+            </p>
+          </motion.div>
+          <motion.div
+            className="flex flex-col justify-start items-center w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+            whileHover={{ scale: 1.05, translateY: -10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="flex flex-col justify-start items-center flex-grow-0 flex-shrink-0 w-[139px] relative gap-[7px]">
+              <Opacity />
+              <p className="self-stretch flex-grow-0 flex-shrink-0 w-[139px] text-xl font-medium text-left text-[#bafd02]">
+                Transparent
+              </p>
+            </div>
+            <p className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-base font-light text-center text-[#bcbcbc]">
+              No hidden fees. Fair pricing that benefits both drivers and
+              riders.{" "}
+            </p>
+          </motion.div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
