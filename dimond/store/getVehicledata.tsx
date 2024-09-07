@@ -66,3 +66,5 @@ export async function getVehicleLoc(tokenId: number): Promise<{} | null> {
     throw error;
   }
 }
+
+

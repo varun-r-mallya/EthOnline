@@ -21,6 +21,10 @@ const ClientPage = () => {
     endLocation: { latitude: number; longitude: number };
     currentLocation: { latitude: number; longitude: number };
   }
+  const [driverLocation, setDriverLocation] = useState<TypeLocation>({
+    latitude: 0,
+    longitude: 0,
+  });
 
   const [pickupLocation, setPickupLocation] = useState<TypeLocation>({
     latitude: 0,
@@ -53,13 +57,32 @@ const ClientPage = () => {
       longitude: 84.23,
     });
   }, []);
-  const getVehicleLocation = async () => {
-    const location = await getVehicleLoc(3);
-    console.log(location);
+  const fetchVehicleLoc = async (tokenId: number) => {
+    const response = await fetch("/api/getVehicle/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tokenId }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+    setDriverLocation({
+      latitude: data.lat,
+      longitude: data.long,
+    });
+    setPickupLocation({
+      latitude: parseFloat((data.lat + Math.random() * 0.01).toFixed(2)),
+      longitude: parseFloat((data.long + Math.random() * 0.01).toFixed(2)),
+    });
   };
   useEffect(() => {
-    getVehicleLocation();
+    fetchVehicleLoc(3);
   }, []);
+  useEffect(() => {
+    console.log("Driver location:", driverLocation);
+  }, [driverLocation]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -132,6 +155,7 @@ const ClientPage = () => {
             </div>
           </div>
           <LocationPicker
+            center={pickupLocation}
             destination={destination}
             setDestination={setDestination}
           />

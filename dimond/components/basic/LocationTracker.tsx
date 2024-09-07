@@ -11,7 +11,7 @@ import {
   Polyline,
   Popup,
 } from "react-leaflet";
-import { MapPin, Pointer, PointerIcon } from "lucide-react";
+import { Locate, MapPin, Pointer, PointerIcon } from "lucide-react";
 import L from "leaflet";
 import { renderToStaticMarkup } from "react-dom/server";
 
@@ -38,6 +38,20 @@ interface CurrentRideMapModalProps {
   onClose: () => void;
   rideData: RideData;
 }
+
+const iconMarkup = renderToStaticMarkup(
+  <>
+    <div style={{ color: "black" }}>
+      <MapPin />
+    </div>
+  </>
+);
+export const customIcon = L.divIcon({
+  html: iconMarkup,
+  className: "custom-icon",
+  iconSize: [24, 24],
+  iconAnchor: [24 / 2, 24],
+});
 
 const CurrentRideMapModal: React.FC<CurrentRideMapModalProps> = ({
   isOpen,
@@ -67,35 +81,9 @@ const CurrentRideMapModal: React.FC<CurrentRideMapModalProps> = ({
     rideData.endLocation.latitude,
     rideData.endLocation.longitude,
   ];
-  const iconMarkup = renderToStaticMarkup(
-    <>
-      <div style={{ color: "red" }}>
-        <MapPin />
-      </div>
+  
 
-      <div
-        style={{
-          backgroundColor: "white",
-          border: "1px solid #ccc",
-          padding: "2px 5px",
-          borderRadius: "3px",
-          marginLeft: "5px",
-          fontSize: "12px",
-          whiteSpace: "nowrap",
-        }}
-      >
-        Start
-      </div>
-    </>
-  );
-
-  const customIcon = L.divIcon({
-    html: iconMarkup,
-    className: "custom-icon",
-    iconSize: [24, 24],
-    iconAnchor: [24 / 2, 24],
-  });
-
+ 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-10">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-3xl">

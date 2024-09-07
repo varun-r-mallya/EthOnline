@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import Modal from '@/components/ui/modal'; // Import the new Modal component
+import { LatLngTuple } from 'leaflet';
+import { customIcon } from './LocationTracker';
 
 interface Coordinates {
   latitude: number | null;
@@ -10,9 +12,10 @@ interface Coordinates {
 interface LocationPickerProps {
   destination: Coordinates;
   setDestination: React.Dispatch<React.SetStateAction<Coordinates>>;
+  center: Coordinates;
 }
 
-const LocationPicker: React.FC<LocationPickerProps> = ({ destination, setDestination }) => {
+const LocationPicker: React.FC<LocationPickerProps> = ({ destination, setDestination ,center}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpenModal = () => setIsOpen(true);
@@ -29,6 +32,10 @@ const LocationPicker: React.FC<LocationPickerProps> = ({ destination, setDestina
     });
     return null;
   };
+ const centerLocation: LatLngTuple = [
+    center.latitude? center.latitude : 0,
+    center.longitude? center.longitude : 0,
+  ];
 
   return (
     <>
@@ -50,7 +57,7 @@ const LocationPicker: React.FC<LocationPickerProps> = ({ destination, setDestina
       <Modal isOpen={isOpen} onClose={handleCloseModal} title="Select Destination">
         <div className="h-[400px] w-full mb-4">
           <MapContainer 
-            center={[destination.latitude || 0, destination.longitude || 0]} 
+            center={[center.latitude || 0, center.longitude || 0]} 
             zoom={13} 
             style={{ height: '100%', width: '100%' }}
           >
@@ -59,8 +66,9 @@ const LocationPicker: React.FC<LocationPickerProps> = ({ destination, setDestina
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             {destination.latitude && destination.longitude && (
-              <Marker position={[destination.latitude, destination.longitude]} />
+              <Marker position={[destination.latitude, destination.longitude]} icon={customIcon}/>
             )}
+            <Marker position={centerLocation} icon={customIcon}/>
             <MapEvents />
           </MapContainer>
         </div>
