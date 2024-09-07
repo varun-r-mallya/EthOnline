@@ -1,38 +1,38 @@
-"use client"
-import React, { useContext, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
-import { Car, DollarSign, Star, MapPin } from 'lucide-react'
-import Chat from '@/components/svgs/Chat'
-import { Web3Context } from '@/store/context/web3context'
-import { get } from 'http'
+"use client";
+import React, { useContext, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Car, DollarSign, Star, MapPin } from "lucide-react";
+import Chat from "@/components/svgs/Chat";
+import { Web3Context } from "@/store/context/web3context";
+import { get } from "http";
+import { getVehicleLoc } from "@/store/getVehicledata";
 
 const DriverPage = () => {
-  const [isOnline, setIsOnline] = React.useState(false)
-  const [isAvailable, setIsAvailable] = React.useState(false)
-  const [rides, setRides] = React.useState([])
-  const [completedRides, setCompletedRides] = React.useState(false)
+  const [isOnline, setIsOnline] = React.useState(false);
+  const [isAvailable, setIsAvailable] = React.useState(false);
+  const [rides, setRides] = React.useState([]);
+  const [completedRides, setCompletedRides] = React.useState(false);
   const [currentRide, setCurrentRide] = React.useState({
     rideId: 0,
     driver: "",
     rider: "",
     startLocation: null,
     endLocation: null,
-    fare: 0
-  })
+    fare: 0,
+  });
   const { account, contract, connectWallet } = useContext(Web3Context);
 
-
-
   useEffect(() => {
-
-    const subscription = contract.events.RideCreated({
-      filter: { driver: account }, // Listen only for this specific driver
-    })
-      .on('data', async (event: any) => {
+    const subscription = contract.events
+      .RideCreated({
+        filter: { driver: account }, // Listen only for this specific driver
+      })
+      .on("data", async (event: any) => {
         console.log("Ride Created Event:", event);
-        const { rideId, driver, rider, startLocation, endLocation, fare } = event.returnValues;
+        const { rideId, driver, rider, startLocation, endLocation, fare } =
+          event.returnValues;
 
         setCurrentRide({
           rideId,
@@ -40,10 +40,10 @@ const DriverPage = () => {
           rider,
           startLocation,
           endLocation,
-          fare
+          fare,
         });
       })
-      .on('error', (error: any) => {
+      .on("error", (error: any) => {
         console.error("Error subscribing to event:", error);
       });
 
@@ -51,77 +51,82 @@ const DriverPage = () => {
     return () => {
       subscription.unsubscribe((error: any, success: boolean) => {
         if (success) {
-          console.log('Successfully unsubscribed from RideCreated event');
+          console.log("Successfully unsubscribed from RideCreated event");
         }
       });
     };
   }, [account]);
 
   const getAllRides = () => {
-    console.log('Getting all rides')
-  }
+    console.log("Getting all rides");
+  };
   const getCompletedRides = () => {
-    console.log('Getting completed rides')
-  }
+    console.log("Getting completed rides");
+  };
   const getEarnings = () => {
-    console.log('Getting earnings')
-  }
+    console.log("Getting earnings");
+  };
   const getTrips = () => {
-    console.log('Getting trips')
-  }
+    console.log("Getting trips");
+  };
   const getVehicleDetails = () => {
-    console.log('Getting vehicle details')
-  }
+    console.log("Getting vehicle details");
+  };
   const getMessages = () => {
-    console.log('Getting messages')
-  }
+    console.log("Getting messages");
+  };
 
   return (
-    <div className='flex justify-center items-start gap-20 '>
-      <div className='flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch'>
-        <p className="text-[64px] font-semibold text-center text-white">Driver Dashboard</p>
-        <p className="text-[32px] font-medium text-center text-[#848484]">Rides </p>
+    <div className="flex justify-center items-start gap-20 ">
+      <div className="flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch">
+        <p className="text-[64px] font-semibold text-center text-white">
+          Driver Dashboard
+        </p>
+        <p className="text-[32px] font-medium text-center text-[#848484]">
+          Rides{" "}
+        </p>
         <div className="flex flex-col justify-start items-start w-[499px] gap-3">
-          <div
-            className="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
-          >
-            <div
-              className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5"
-            >
+          <div className="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white">
+            <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
               <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
                 <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
                   {currentRide.startLocation} to {currentRide.endLocation}
                 </p>
               </div>
-              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
+              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">
+                Accept
+              </p>
             </div>
           </div>
           {rides.map((ride, index) => (
-            <div key={index}
+            <div
+              key={index}
               className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
             >
-              <div
-                className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5"
-              >
+              <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
                 <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
                   <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
                     A to B
                   </p>
                 </div>
-                <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
-              </div> </div>
+                <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">
+                  Accept
+                </p>
+              </div>{" "}
+            </div>
           ))}
-
         </div>
-        <p className="text-[32px] font-medium text-center text-[#848484]">Completed Rides</p>
-        <div
-          className="flex flex-col justify-start items-center w-[529px] h-[195px] relative gap-1.5 px-[23px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
-        >
+        <p className="text-[32px] font-medium text-center text-[#848484]">
+          Completed Rides
+        </p>
+        <div className="flex flex-col justify-start items-center w-[529px] h-[195px] relative gap-1.5 px-[23px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
           <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative">
             <p className="flex-grow w-[431px] text-xl font-medium text-left text-[#bababa]">
               City Center to Airport
             </p>
-            <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#7d7d7d]">Aug 21</p>
+            <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#7d7d7d]">
+              Aug 21
+            </p>
           </div>
           <svg
             width="483"
@@ -145,13 +150,14 @@ const DriverPage = () => {
             <p className="flex-grow w-[430px] text-xl font-medium text-left text-[#bababa]">
               City Center to Airport
             </p>
-            <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#7d7d7d]">Aug 18</p>
+            <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#7d7d7d]">
+              Aug 18
+            </p>
           </div>
         </div>
       </div>
-      <div className='flex flex-col mt-20'>
-        <div className='flex gap-2 justify-end items-center mb-2 '>
-
+      <div className="flex flex-col mt-20">
+        <div className="flex gap-2 justify-end items-center mb-2 ">
           <div className="flex justify-start items-center relative gap-[8.454545021057129px] ">
             <svg
               width="30"
@@ -165,8 +171,9 @@ const DriverPage = () => {
               <path
                 d="M15.2182 0L18.6349 10.5155H29.6915L20.7465 17.0144L24.1632 27.5299L15.2182 21.031L6.27316 27.5299L9.68985 17.0144L0.744831 10.5155H11.8015L15.2182 0Z"
                 fill="#BAFD02"
-              ></path></svg
-            ><svg
+              ></path>
+            </svg>
+            <svg
               width="30"
               height="28"
               viewBox="0 0 30 28"
@@ -178,8 +185,9 @@ const DriverPage = () => {
               <path
                 d="M15.1091 0L18.5258 10.5155H29.5824L20.6374 17.0144L24.0541 27.5299L15.1091 21.031L6.16406 27.5299L9.58075 17.0144L0.635731 10.5155H11.6924L15.1091 0Z"
                 fill="#BAFD02"
-              ></path></svg
-            ><svg
+              ></path>
+            </svg>
+            <svg
               width="30"
               height="28"
               viewBox="0 0 30 28"
@@ -191,8 +199,9 @@ const DriverPage = () => {
               <path
                 d="M15 0L18.4167 10.5155H29.4733L20.5283 17.0144L23.945 27.5299L15 21.031L6.05496 27.5299L9.47165 17.0144L0.52663 10.5155H11.5833L15 0Z"
                 fill="#BAFD02"
-              ></path></svg
-            ><svg
+              ></path>
+            </svg>
+            <svg
               width="30"
               height="28"
               viewBox="0 0 30 28"
@@ -204,8 +213,9 @@ const DriverPage = () => {
               <path
                 d="M14.8909 0L18.3076 10.5155H29.3643L20.4192 17.0144L23.8359 27.5299L14.8909 21.031L5.94589 27.5299L9.36258 17.0144L0.417561 10.5155H11.4742L14.8909 0Z"
                 fill="#BAFD02"
-              ></path></svg
-            ><svg
+              ></path>
+            </svg>
+            <svg
               width="30"
               height="28"
               viewBox="0 0 30 28"
@@ -220,12 +230,14 @@ const DriverPage = () => {
                 strokeWidth="0.845455"
               ></path>
             </svg>
-          </div>(110 reviews)
+          </div>
+          (110 reviews)
         </div>
-        <div className='flex gap-2 justify-end items-center mb-2 mt-10'>
-
+        <div className="flex gap-2 justify-end items-center mb-2 mt-10">
           <div className="flex flex-col justify-start items-center w-[258px] relative px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
-            <p className="flex-grow-0 flex-shrink-0 text-5xl text-center text-[#bcbcbc]">$120.05</p>
+            <p className="flex-grow-0 flex-shrink-0 text-5xl text-center text-[#bcbcbc]">
+              $120.05
+            </p>
             <p className="self-stretch flex-grow-0 flex-shrink-0 w-[232px] text-[32px] font-semibold text-center text-[#bafd02]">
               Earnings
             </p>
@@ -234,7 +246,9 @@ const DriverPage = () => {
             </p>
           </div>
           <div className="flex flex-col justify-start items-center w-[258px] relative px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
-            <p className="flex-grow-0 flex-shrink-0 text-5xl text-center text-[#bcbcbc]">124</p>
+            <p className="flex-grow-0 flex-shrink-0 text-5xl text-center text-[#bcbcbc]">
+              124
+            </p>
             <p className="flex-grow-0 flex-shrink-0 w-[180px] text-[32px] font-semibold text-center text-[#bafd02]">
               Trips
             </p>
@@ -243,9 +257,10 @@ const DriverPage = () => {
             </p>
           </div>
         </div>
-        <div className='flex flex-col gap-2 justify-center items-start mb-2 mt-10'>
-
-          <p className="text-[32px] font-medium text-center text-[#9c9c9c]">Vehicle Details</p>
+        <div className="flex flex-col gap-2 justify-center items-start mb-2 mt-10">
+          <p className="text-[32px] font-medium text-center text-[#9c9c9c]">
+            Vehicle Details
+          </p>
           <div className="flex flex-col justify-start items-center w-[529px] h-[159px] relative gap-1.5 px-[23px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
             <p className="self-stretch flex-grow-0 flex-shrink-0 w-[483px] text-xl font-medium text-left text-[#bababa]">
               ID - aslkdfnahlhfdlah
@@ -279,7 +294,9 @@ const DriverPage = () => {
         <div className="flex justify-start items-center w-[529px] h-[65px] relative gap-2.5 px-[35px] py-2 rounded-tl-2xl rounded-tr-2xl bg-gradient-to-b from-[#1b211f] to-[#101517]">
           <div className="flex justify-start items-center flex-grow relative gap-5 px-[19px] py-[9px]">
             <Chat />
-            <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-white">Your messages</p>
+            <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-white">
+              Your messages
+            </p>
           </div>
           <svg
             width={18}
@@ -290,14 +307,17 @@ const DriverPage = () => {
             className="flex-grow-0 flex-shrink-0"
             preserveAspectRatio="none"
           >
-            <path d="M17 9.5L9 1.5L1 9.5" stroke="white" strokeWidth={2} strokeLinecap="round" />
+            <path
+              d="M17 9.5L9 1.5L1 9.5"
+              stroke="white"
+              strokeWidth={2}
+              strokeLinecap="round"
+            />
           </svg>
         </div>
-
       </div>
-
     </div>
-  )
-}
+  );
+};
 
-export default DriverPage
+export default DriverPage;

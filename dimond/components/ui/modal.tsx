@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center p-4 z-10">
       <div className="bg-white rounded-lg shadow-xl max-w-xl w-full">
         <div className="p-4 border-b">
-          <h2 className="text-xl font-semibold">{title}</h2>
+          <h2 className="text-xl font-semibold text-black">{title}</h2>
         </div>
         <div className="p-4">
           {children}
