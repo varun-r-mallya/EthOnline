@@ -11,6 +11,7 @@ import { Web3Context } from "@/store/context/web3context";
 import { Location as TypeLocation, Ride } from "@/lib/types";
 import LocationPicker from "@/components/basic/LocationPicker";
 import CurrentRideMapModal from "@/components/basic/LocationTracker";
+import { getVehicleLoc } from "@/store/getVehicledata";
 
 const ClientPage = () => {
   interface RideData {
@@ -52,6 +53,14 @@ const ClientPage = () => {
       longitude: 84.23,
     });
   }, []);
+  const getVehicleLocation = async () => {
+    const location = await getVehicleLoc(3);
+    console.log(location);
+  };
+  useEffect(() => {
+    getVehicleLocation();
+  }, []);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentRideData((prevData) => ({
@@ -162,17 +171,17 @@ const ClientPage = () => {
         <p className="text-[32px] font-medium text-center text-[#848484] gap-2">
           Completed Rides
         </p>
-          <Button
-            className="flex items-center gap-2.5 p-4 rounded-lg border border-gray-200 bg-white shadow-sm cursor-pointer hover:bg-gray-50 cursor-pointer z-10 text-black"
-            onClick={handleCurrentRide}
-          >
-            Current Ride
-          </Button>
-          <CurrentRideMapModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            rideData={currentRideData}
-          />{" "}
+        <Button
+          className="flex items-center gap-2.5 p-4 rounded-lg border border-gray-200 bg-white shadow-sm cursor-pointer hover:bg-gray-50 cursor-pointer z-10 text-black"
+          onClick={handleCurrentRide}
+        >
+          Current Ride
+        </Button>
+        <CurrentRideMapModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          rideData={currentRideData}
+        />{" "}
         <div className="flex flex-col justify-start items-center w-[529px] h-[195px] relative gap-1.5 px-[23px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
           {rides.map((ride) => (
             <>
