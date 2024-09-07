@@ -1,0 +1,613 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "acceptRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "startLocation",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "endLocation",
+				"type": "tuple"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			}
+		],
+		"name": "createRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			}
+		],
+		"name": "DriverRegistered",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "rating",
+				"type": "uint256"
+			}
+		],
+		"name": "DriverReviewed",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			}
+		],
+		"name": "endRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "attestation",
+				"type": "string"
+			}
+		],
+		"name": "registerDriver",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "registerRider",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "requestRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rating",
+				"type": "uint256"
+			}
+		],
+		"name": "reviewDriver",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "RideAccepted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "startLocation",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"indexed": false,
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "endLocation",
+				"type": "tuple"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			}
+		],
+		"name": "RideCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			}
+		],
+		"name": "RideEnded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "nearbyDrivers",
+				"type": "address[]"
+			}
+		],
+		"name": "RideRequested",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "RideStarted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "RiderRegistered",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "startRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "driverAddress",
+				"type": "address"
+			}
+		],
+		"name": "verifyDriverKYC",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "drivers",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "driverAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "attestation",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "kycVerified",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rating",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rideCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAvailable",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getCurrentRide",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "rideId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "driver",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "rider",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "startLocation",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "endLocation",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "currentLocation",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fare",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCompleted",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Ride",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "rideCounter",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "riders",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "riderAddress",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "rides",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "startLocation",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "endLocation",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "currentLocation",
+				"type": "tuple"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isCompleted",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

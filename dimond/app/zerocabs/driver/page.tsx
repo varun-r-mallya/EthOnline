@@ -1,16 +1,86 @@
-import React from 'react'
+"use client"
+import React, { useContext, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Car, DollarSign, Star, MapPin } from 'lucide-react'
 import Chat from '@/components/svgs/Chat'
+import { Web3Context } from '@/store/context/web3context'
+import { get } from 'http'
 
 const DriverPage = () => {
+  const [isOnline, setIsOnline] = React.useState(false)
+  const [isAvailable, setIsAvailable] = React.useState(false)
+  const [rides, setRides] = React.useState([])
+  const [completedRides, setCompletedRides] = React.useState(false)
+  const [currentRide, setCurrentRide] = React.useState({
+    rideId: 0,
+    driver: "",
+    rider: "",
+    startLocation: null,
+    endLocation: null,
+    fare: 0
+  })
+  const { account, contract, connectWallet } = useContext(Web3Context);
+
+
+
+  useEffect(() => {
+
+    const subscription = contract.events.RideCreated({
+      filter: { driver: account }, // Listen only for this specific driver
+    })
+      .on('data', async (event: any) => {
+        console.log("Ride Created Event:", event);
+        const { rideId, driver, rider, startLocation, endLocation, fare } = event.returnValues;
+
+        setCurrentRide({
+          rideId,
+          driver,
+          rider,
+          startLocation,
+          endLocation,
+          fare
+        });
+      })
+      .on('error', (error: any) => {
+        console.error("Error subscribing to event:", error);
+      });
+
+    // Clean up WebSocket connection when component unmounts
+    return () => {
+      subscription.unsubscribe((error: any, success: boolean) => {
+        if (success) {
+          console.log('Successfully unsubscribed from RideCreated event');
+        }
+      });
+    };
+  }, [account]);
+
+  const getAllRides = () => {
+    console.log('Getting all rides')
+  }
+  const getCompletedRides = () => {
+    console.log('Getting completed rides')
+  }
+  const getEarnings = () => {
+    console.log('Getting earnings')
+  }
+  const getTrips = () => {
+    console.log('Getting trips')
+  }
+  const getVehicleDetails = () => {
+    console.log('Getting vehicle details')
+  }
+  const getMessages = () => {
+    console.log('Getting messages')
+  }
+
   return (
     <div className='flex justify-center items-start gap-20 '>
       <div className='flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch'>
         <p className="text-[64px] font-semibold text-center text-white">Driver Dashboard</p>
-        <p className="text-[32px] font-medium text-center text-[#848484]">Ride requests</p>
+        <p className="text-[32px] font-medium text-center text-[#848484]">Rides </p>
         <div className="flex flex-col justify-start items-start w-[499px] gap-3">
           <div
             className="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
@@ -20,40 +90,28 @@ const DriverPage = () => {
             >
               <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
                 <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
-                  Central City to Airport
+                  {currentRide.startLocation} to {currentRide.endLocation}
                 </p>
               </div>
               <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
             </div>
           </div>
-          <div
-            className="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
-          >
-            <div
-              className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5"
+          {rides.map((ride, index) => (
+            <div key={index}
+              className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
             >
-              <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
-                <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
-                  Central City to Airport
-                </p>
-              </div>
-              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
-            </div>
-          </div>
-          <div
-            className="flex flex-col justify-center items-start self-stretch flex-grow-0 flex-shrink-0 gap-2.5 px-[31px] py-2 rounded-[10px] border border-white"
-          >
-            <div
-              className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5"
-            >
-              <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
-                <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
-                  Central City to Airport
-                </p>
-              </div>
-              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
-            </div>
-          </div>
+              <div
+                className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5"
+              >
+                <div className="flex justify-start items-center flex-grow relative gap-5 py-[9px]">
+                  <p className="flex-grow-0 flex-shrink-0 text-xl text-left text-white">
+                    A to B
+                  </p>
+                </div>
+                <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">Accept</p>
+              </div> </div>
+          ))}
+
         </div>
         <p className="text-[32px] font-medium text-center text-[#848484]">Completed Rides</p>
         <div
