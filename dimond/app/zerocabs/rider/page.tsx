@@ -7,7 +7,9 @@ import Chat from '@/components/svgs/Chat';
 import { Location, MyLocation } from '@/components/svgs/Location';
 import ChatComponent from '@/components/basic/ChatComponent';
 
+
 const ClientPage = () => {
+
   return (
     <div className='flex justify-center items-start gap-20 '>
       <div className='flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch'>
