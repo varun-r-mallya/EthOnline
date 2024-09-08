@@ -88,7 +88,7 @@ This project is a decentralized taxi service that empowers riders to request rid
 1. Clone the repository:
     ```bash
     https://github.com/varun-r-mallya/EthOnline.git
-    cd decentralized-taxi-service
+    cd dimond
     ```
 
 2. Install dependencies:
