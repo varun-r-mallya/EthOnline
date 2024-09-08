@@ -17,7 +17,7 @@ export const Web3Context = createContext<Web3ContextProps>({
   web3: null,
   account: null,
   contract: null,
-  connectWallet: async () => {},
+  connectWallet: async () => { },
 });
 
 interface Web3ProviderProps {
@@ -28,10 +28,13 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
   const [web3, setWeb3] = useState<Web3 | null>(null);
   const [account, setAccount] = useState<string | null>(null);
   const [contract, setContract] = useState<any | null>(null);
-const {provider,initWeb3Auth}=useAppStore();
+  const { provider, initWeb3Auth } = useAppStore();
 
   const contractABI = abi;
-  const contractAddress = '0xb92297Fc47A5088401473CdCa7aae4E3D08e70B6';
+  //const contractAddress = '0xb92297Fc47A5088401473CdCa7aae4E3D08e70B6';
+  // const contractAddress = '0x03B60f39fB6A1B907423C40A313151405955015A';
+  // const contractAddress = '0x37f79023ce6E8dBb5DAcDc77b36dB95b96090223';
+  const contractAddress = '0x0A9fB3196cD4b4B3252c61A33a011d4b4C8c0921'
 
   // Connect to MetaMask wallet
   const connectWallet = async () => {

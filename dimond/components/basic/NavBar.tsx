@@ -1,3 +1,4 @@
+"use client"
 import { useAppStore } from "@/store/useAppStore";
 import { CarFront, Menu, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -36,14 +37,16 @@ export const NavBar: React.FC = () => {
 
   const handleConnect = async () => {
     console.log("wokginocne n");
-    
+
     await connectWallet();
   };
 
   const interactWithContract = async () => {
     if (contract && account) {
-      const result = await contract.methods.yourMethod().call({ from: account });
-      console.log('Contract result:', result);
+      const result = await contract.methods
+        .yourMethod()
+        .call({ from: account });
+      console.log("Contract result:", result);
     }
   };
   //   useEffect(() => {
@@ -101,16 +104,22 @@ export const NavBar: React.FC = () => {
             </li>
           </ul>
           {account ? (
-                  <div>
-                    <p>Connected Account: {account}</p>
-                    <button onClick={interactWithContract}>Interact with Contract</button>
-                  </div>
-                ) : (
-                  <div className="w-[146px] h-14 relative overflow-hidden rounded-[9px] bg-[#bafd02]" onClick={connectWallet}>
-                 
-                  <button onClick={handleConnect} className=" cursor-pointer absolute left-[22px] top-[13px] text-xl font-medium text-left text-black">Connect Wallet</button>
-                </div>
-                )}
+            <div>
+              <p>Connected Account: {account}</p>
+            </div>
+          ) : (
+            <div
+              className="w-[146px] h-14 overflow-hidden rounded-[9px] bg-[#bafd02] items-center flex justify-center cursor-pointer z-100"
+              onClick={connectWallet}
+            >
+              <button
+                onClick={handleConnect}
+                className="  text-xl font-medium text-left text-black z-10"
+              >
+                Connect Wallet
+              </button>
+            </div>
+          )}
           {web3authSFAuth ? (
             provider ? (
               <>
@@ -158,18 +167,9 @@ export const NavBar: React.FC = () => {
                   </div>
                 </div>
               </>
-            ) : (
-              <>
-                <div className="w-[146px] h-14 relative overflow-hidden rounded-[9px] bg-[#bafd02]" onClick={connectWallet}>
-                  <p className="absolute left-[22px] top-[13px] text-xl font-medium text-left text-black">
-                    Connect Wallet
-                  </p>
-                </div>
-              
-              </>
-            )
+            ) : null
           ) : null}
-          
+
           <div className="md:hidden">
             <Menu className="text-gray-100 cursor-pointer" />
           </div>

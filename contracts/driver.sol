@@ -45,6 +45,7 @@ contract DecentralizedRideHailing {
     mapping(address => Rider) public riders;
     mapping(uint256 => Ride) public rides;
     mapping(uint256 => Emergency) public emergencies; // Add this line to define the mapping
+    mapping(uint256 => Emergency) public emergencies; // Add this line to define the mapping
     uint256 public rideCounter;
 
     event DriverRegistered(address indexed driver);
@@ -155,15 +156,14 @@ contract DecentralizedRideHailing {
 
     function endRide(address rider, uint256 fare) external {
         payable(msg.sender).transfer(fare); // Ensure proper payment handling
+        payable(msg.sender).transfer(fare); // Ensure proper payment handling
         drivers[msg.sender].rideCount++;
         drivers[msg.sender].isAvailable = true;
         emit RideEnded(msg.sender, rider, fare);
     }
 
     function reviewDriver(address driver, uint256 rating) external {
-        drivers[driver].rating =
-            (drivers[driver].rating * drivers[driver].rideCount + rating) /
-            (drivers[driver].rideCount + 1);
+        drivers[driver].rating = (drivers[driver].rating * drivers[driver].rideCount + rating) / (drivers[driver].rideCount + 1);
         emit DriverReviewed(msg.sender, driver, rating);
     }
 
@@ -178,6 +178,8 @@ contract DecentralizedRideHailing {
         Location memory startLocation,
         Location memory endLocation,
         uint256 fare
+    ) external {
+        require(drivers[driver].isAvailable, "Driver is not available");
     ) external {
         require(drivers[driver].isAvailable, "Driver is not available");
 
@@ -205,6 +207,7 @@ contract DecentralizedRideHailing {
             fare
         );
     }
+
 
     function getCurrentRide() external view returns (Ride memory) {
         for (uint256 i = 1; i <= rideCounter; i++) {
