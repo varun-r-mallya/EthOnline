@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Web3Context } from "@/store/context/web3context";
+import AcceptEmergencyButton from "@/components/basic/AcceptEmergency";
 
 // DriverPage component
 const DriverPage = () => {
@@ -53,52 +54,8 @@ const DriverPage = () => {
         <p className="text-[64px] font-semibold text-center text-white">
           Emergency Dashboard
         </p>
-
-        {/* Display loading message */}
-        {loading && <p>Loading emergencies...</p>}
-
-        {/* Display error message */}
-        {error && <p className="text-red-500">{error}</p>}
-
-        {/* Render emergencies */}
-        {emergencies.length > 0 ? (
-          <div className="flex flex-col gap-4">
-            {emergencies.map((emergency, index) => (
-              <div key={index} className="bg-gray-800 p-4 rounded-lg">
-                <p className="text-white">
-                  <strong>Ride ID:</strong> {emergency.ride.rideId}
-                </p>
-                <p className="text-white">
-                  <strong>Driver:</strong> {emergency.ride.driver}
-                </p>
-                <p className="text-white">
-                  <strong>Rider:</strong> {emergency.ride.rider}
-                </p>
-                <p className="text-white">
-                  <strong>Start Location:</strong> {emergency.ride.startLocation}
-                </p>
-                <p className="text-white">
-                  <strong>End Location:</strong> {emergency.ride.endLocation}
-                </p>
-                <p className="text-white">
-                  <strong>Fare:</strong> {emergency.ride.fare}
-                </p>
-
-                {/* Accept Emergency Button */}
-                <Button
-                  onClick={() => handleEmergency(emergency.ride.rideId)}
-                  disabled={loading}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-                >
-                  {loading ? "Processing..." : "Handle Emergency"}
-                </Button>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-white">No emergencies found.</p>
-        )}
-      </div>
+      <AcceptEmergencyButton rideId={0} />
+        </div>
     </div>
   );
 };

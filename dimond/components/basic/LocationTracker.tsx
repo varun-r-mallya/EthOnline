@@ -118,7 +118,7 @@ const CurrentRideMapModal: React.FC<CurrentRideMapModalProps> = ({
             <strong>Rider:</strong> {rideData.rider}
           </div>
         </div>
-        <AcceptEmergencyButton rideId={0}/>
+        {/* <AcceptEmergencyButton rideId={0}/> */}
         <EmergencyButton/>
         <div className="p-4 border-t flex justify-end">
           <button
