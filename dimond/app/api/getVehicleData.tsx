@@ -22,7 +22,7 @@ interface Signal {
 
 export async function getVehicleLoc(tokenId: number): Promise<{} | null> {
     const privToken = "Bearer " + await exchangeToken(process.env.BEARER_TOKEN||"", tokenId);
-
+    console.log(privToken);
     const query = `
     query GetLatestSignals {
       signalsLatest(tokenId: ${tokenId}) {
@@ -53,7 +53,6 @@ export async function getVehicleLoc(tokenId: number): Promise<{} | null> {
         const lat = response.data.data.signalsLatest.lat.value;
         const long = response.data.data.signalsLatest.currentLocationLongitude.value; 
         const location = {lat, long};
-        console.log(location);
         return location || null;
     } catch (error) {
         if (axios.isAxiosError(error) && error.response) {
