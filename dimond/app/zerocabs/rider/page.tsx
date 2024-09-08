@@ -13,9 +13,16 @@ import LocationPicker from "@/components/basic/LocationPicker";
 import CurrentRideMapModal from "@/components/basic/LocationTracker";
 import { getVehicleLoc } from "@/store/getVehicledata";
 
+export const getLocationString = async (location: TypeLocation) => {
+  //[TODO ] get the location string from the location object
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${location.latitude}&lon=${location.longitude}&format=json`;
+  const response = await fetch(url);
+  console.log(response.json());
+
+  return "not figured";
+};
 
 const ClientPage = () => {
-
   interface RideData {
     driver: string;
     rider: string;
@@ -106,6 +113,8 @@ const ClientPage = () => {
   const findDrivers = async () => {
     console.log("Finding drivers");
     const fare = 80;
+    console.log(contract, account);
+
     //[TODO] fucniton to get the driver address from contract and dimo
     if (contract && account) {
       const result = await contract.methods
@@ -125,11 +134,7 @@ const ClientPage = () => {
       console.log("Contract result:", result);
     }
   };
-  const getLocationString = (location: TypeLocation) => {
-    //[TODO ] get the location string from the location object
-    return "not figured";
-  };
-    
+
   return (
     <div className="flex justify-center items-start gap-20 ">
       <div className="flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch">

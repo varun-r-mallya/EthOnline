@@ -25,38 +25,55 @@ const DriverPage = () => {
   const { account, contract, connectWallet } = useContext(Web3Context);
 
   useEffect(() => {
-    const subscription = contract.events
-      .RideCreated({
-        filter: { driver: account }, // Listen only for this specific driver
-      })
-      .on("data", async (event: any) => {
-        console.log("Ride Created Event:", event);
-        const { rideId, driver, rider, startLocation, endLocation, fare } =
-          event.returnValues;
-
-        setCurrentRide({
-          rideId,
-          driver,
-          rider,
-          startLocation,
-          endLocation,
-          fare,
-        });
-      })
-      .on("error", (error: any) => {
-        console.error("Error subscribing to event:", error);
-      });
-
+    let subscription: any;
+  
+    const initializeContractAndSubscribe = async () => {
+      try {
+        await connectWallet();
+        
+        if (contract && contract.events) {
+          subscription = contract.events
+            .RideCreated({
+              filter: { driver: account }, // Listen only for this specific driver
+            })
+            .on("data", async (event: any) => {
+              console.log("Ride Created Event:", event);
+              const { rideId, driver, rider, startLocation, endLocation, fare } =
+                event.returnValues;
+  
+              setCurrentRide({
+                rideId,
+                driver,
+                rider,
+                startLocation,
+                endLocation,
+                fare,
+              });
+            })
+            .on("error", (error: any) => {
+              console.error("Error subscribing to event:", error);
+            });
+        } else {
+          console.error("Contract or contract.events is not available");
+        }
+      } catch (error) {
+        console.error("Error initializing contract:", error);
+      }
+    };
+  
+    initializeContractAndSubscribe();
+  
     // Clean up WebSocket connection when component unmounts
     return () => {
-      subscription.unsubscribe((error: any, success: boolean) => {
-        if (success) {
-          console.log("Successfully unsubscribed from RideCreated event");
-        }
-      });
+      if (subscription) {
+        subscription.unsubscribe((error: any, success: boolean) => {
+          if (success) {
+            console.log("Successfully unsubscribed from RideCreated event");
+          }
+        });
+      }
     };
-  }, [account]);
-
+  }, [account, contract]); // Add contract to the dependency array
   const getAllRides = () => {
     console.log("Getting all rides");
   };
@@ -75,7 +92,11 @@ const DriverPage = () => {
   const getMessages = () => {
     console.log("Getting messages");
   };
+  const acceptRide=()=>{
+    console.log("Accepting Ride");
+    //[TODO] Add logic to accept the ride 
 
+  }
   return (
     <div className="flex justify-center items-start gap-20 ">
       <div className="flex flex-col w-[608px] px-[18px] py-[32px] items-start gap-[18px] self-stretch">
@@ -93,7 +114,7 @@ const DriverPage = () => {
                   {currentRide.startLocation} to {currentRide.endLocation}
                 </p>
               </div>
-              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02]">
+              <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-[#bafd02] z-10 cursor-pointer  " onClick={acceptRide}>
                 Accept
               </p>
             </div>
@@ -263,7 +284,7 @@ const DriverPage = () => {
           </p>
           <div className="flex flex-col justify-start items-center w-[529px] h-[159px] relative gap-1.5 px-[23px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]">
             <p className="self-stretch flex-grow-0 flex-shrink-0 w-[483px] text-xl font-medium text-left text-[#bababa]">
-              ID - aslkdfnahlhfdlah
+              ID - 3
             </p>
             <svg
               width={483}
