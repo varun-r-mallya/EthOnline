@@ -275,14 +275,19 @@
 		"name": "drivers",
 		"outputs": [
 			{
+				"internalType": "string",
+				"name": "gID",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "driverAddress",
 				"type": "address"
 			},
 			{
-				"internalType": "string",
+				"internalType": "bool",
 				"name": "attestation",
-				"type": "string"
+				"type": "bool"
 			},
 			{
 				"internalType": "bool",
@@ -426,7 +431,7 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "attestation",
+				"name": "gID",
 				"type": "string"
 			}
 		],

@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useContext } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CarTaxiFront, User, Shield, ArrowLeft } from "lucide-react";
@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 import { Car, Security, Steering } from "@/components/svgs/choicePage";
 import { log } from "console";
 import { motion } from 'framer-motion'
-import Web3 from 'web3';
+import { Web3Context } from "@/store/context/web3context";
+import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation';
 
 const RoleChoicePage = () => {
   const {
@@ -35,12 +37,13 @@ const RoleChoicePage = () => {
     showWalletUI,
     showWalletScanner,
   } = useAppStore();
-
+  const { contract, account, connectWallet } = useContext(Web3Context);
+  const router = useRouter();
   const [userInfo, setUserInfo] = useState<any>();
   useEffect(() => {
     initWeb3Auth();
   }, []);
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     if (web3authSFAuth) {
       getUserInfo().then((info) => {
@@ -48,7 +51,21 @@ const RoleChoicePage = () => {
       });
     }
   }, [web3authSFAuth]);
-
+  const driverRegister = async () => {
+    console.log("button clicked ");
+    const idToken = userInfo?.idToken;
+    setLoading(true)
+    if (contract && account) {
+      console.log(userInfo)
+      const result = await contract.methods.registerDriver(idToken)
+        .send({ from: account })
+        .on("receipt", (receipt: any) => {
+          console.log(receipt);
+          router.push('/zerocabs/driver')
+          setLoading(false)
+        });
+    }
+  }
   return (
     <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
       <p className="text-7xl font-semibold text-center text-white mb-16">
@@ -135,7 +152,7 @@ const RoleChoicePage = () => {
           whileHover={{ scale: 1.05, translateY: -10 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <a href="/zerocabs/driver">
+          <button onClick={driverRegister}>
 
             <div
               className="flex flex-col justify-start items-center gap-2"
@@ -149,8 +166,8 @@ const RoleChoicePage = () => {
             <p
               className="text-lg font-extralight text-center text-[#bcbcbc]"
             >
-              Offer rides and earn crypto
-            </p></a>
+              {loading ? "Loading..." : "Offer rides and earn crypto"}
+            </p></button>
         </motion.div>
 
         <motion.div

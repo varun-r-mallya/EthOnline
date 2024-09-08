@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import { Web3Provider } from "@/store/context/web3context";
+import { Route } from "react-router-dom";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+
         <Web3Provider>
           {children}
         </Web3Provider>
