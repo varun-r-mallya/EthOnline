@@ -14,13 +14,23 @@ import CurrentRideMapModal from "@/components/basic/LocationTracker";
 import { getVehicleLoc } from "@/store/getVehicledata";
 import EmergencyButton from "@/components/basic/EmergencyButton";
 
-export const getLocationString = async (location: TypeLocation) => {
-  //[TODO ] get the location string from the location object
-  const url = `https://nominatim.openstreetmap.org/reverse?lat=${location.latitude}&lon=${location.longitude}&format=json`;
-  const response = await fetch(url);
-  console.log(response.json());
 
-  return "not figured";
+const LocationDisplay = ({ location }: { location: TypeLocation }) => {
+  const [locationString, setLocationString] = useState("Loading...");
+
+  useEffect(() => {
+    const getLocationString = async (location: TypeLocation) => {
+      const url = `https://nominatim.openstreetmap.org/reverse?lat=${location.latitude}&lon=${location.longitude}&format=json`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data,data.address["amenity"],data.address.road,data.address.house_number);
+      setLocationString(data.display_name || "Location not found");
+    };
+
+    getLocationString(location);
+  }, [location]);
+
+  return <p>{locationString}</p>;
 };
 
 const ClientPage = () => {
@@ -54,7 +64,12 @@ const ClientPage = () => {
     currentLocation: { latitude: 40.7306, longitude: -73.9352 },
   });
 
-  const [rides, setRides] = React.useState<Ride[]>([]);
+  const [rides, setRides] = React.useState<Ride[]>([
+    {
+      startLocation: { latitude: 40.7128, longitude: -74.006 },
+      endLocation: { latitude: 40.7484, longitude: -73.9857 },
+    },
+  ]);
   const [driver, setDriver] = React.useState(
     "0xb92297Fc47A5088401473CdCa7aae4E3D08e70B6"
   );
@@ -110,6 +125,15 @@ const ClientPage = () => {
   }, []);
   const handleCurrentRide = () => {
     setIsModalOpen(true);
+  };
+  const getLocationString = async (location: TypeLocation) => {
+    //[TODO ] get the location string from the location object
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${location.latitude}&lon=${location.longitude}&format=json`;
+    const response = await fetch(url);
+  const data=await response.json()
+  console.log(data);
+  
+    return "not figured";
   };
   const findDrivers = async () => {
     console.log("Finding drivers");
@@ -220,8 +244,10 @@ const ClientPage = () => {
             <>
               <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative">
                 <p className="flex-grow w-[431px] text-xl font-medium text-left text-[#bababa]">
-                  {getLocationString(ride.startLocation)} to{" "}
-                  {getLocationString(ride.endLocation)}
+                  <LocationDisplay location={ride.startLocation} /> to{" "}
+                  <LocationDisplay location={ride.endLocation} />
+                  {/* {getLocationString(ride.startLocation)} to{" "} */}
+                  {/* {getLocationString(ride.endLocation)} */}
                 </p>
                 <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#7d7d7d]">
                   Aug 21
