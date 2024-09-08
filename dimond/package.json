@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethsign/sp-sdk": "^0.7.3",
     "@metamask/detect-provider": "^2.0.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-separator": "^1.1.0",
@@ -26,6 +27,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "eth-sign": "^0.3.4",
     "ethers": "^6.13.2",
     "framer-motion": "^11.5.4",
     "leaflet": "^1.9.4",
@@ -38,6 +40,7 @@
     "switch": "^0.0.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "viem": "^2.21.3",
     "web-vitals": "^4.2.3",
     "web3": "^4.12.1",
     "zustand": "^4.5.5"

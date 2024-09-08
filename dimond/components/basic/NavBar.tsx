@@ -6,9 +6,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 import { Web3Context } from "@/store/context/web3context";
+import { SignProtocolClient, SpMode, EvmChains,delegateSignAttestation } from "@ethsign/sp-sdk";
+
 export const NavBar: React.FC = () => {
   const [selected, setSelected] = useState<number | null>(null);
   const { account, contract, connectWallet } = useContext(Web3Context);
+  const [signer, setSigner] = useState<string | null>(null);
+  const [attestationResult, setAttestationResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
   const navItems = ["Home", "About", "Contact"];
   const sliderWidth = 50;
   const router = useRouter();
@@ -19,6 +25,7 @@ export const NavBar: React.FC = () => {
     showWalletUI,
     initWeb3Auth,
     getUserInfo,
+    getAccounts,
   } = useAppStore();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -31,6 +38,8 @@ export const NavBar: React.FC = () => {
   };
   const [userInfo, setUserInfo] = useState<any>();
   useEffect(() => {
+    initWeb3Auth();
+  }, [initWeb3Auth]);useEffect(() => {
     initWeb3Auth();
   }, []);
 
@@ -57,6 +66,68 @@ export const NavBar: React.FC = () => {
   //       }
   //     }
   //   }, [web3authSFAuth]);
+  // let signProtocolClient: SignProtocolClient | null = null;
+  // // Function to initialize SignProtocolClient
+  // const initializeClient = async () => {
+  //   if (web3authSFAuth && provider) {
+  //     signProtocolClient = new SignProtocolClient(SpMode.OnChain, {
+  //       chain: EvmChains.sepolia,
+  //       account: undefined,
+  //     });
+  //   } else {
+  //     console.error("Web3Auth or provider is not initialized.");
+  //   }
+  // };
+  
+  // // Function to create a notary attestation
+  // const createNotaryAttestation = async (contractDetails: string, signer: string) => {
+  //   if (!signProtocolClient) {
+  //     console.error("SignProtocolClient is not initialized.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const res = await signProtocolClient.createAttestation({
+  //       schemaId: "0x1c6", 
+  //       data: {
+  //         contractDetails,
+  //         signer,
+  //       },
+  //       indexingValue: signer.toLowerCase(),
+  //     });
+
+  //     console.log("Attestation created:", res);
+  //     return res;
+  //   } catch (error) {
+  //     console.error("Error creating attestation:", error);
+  //     throw new Error("Failed to create attestation");
+  //   }
+  // };
+
+
+
+  // useEffect(() => {
+  //   if (web3authSFAuth) {
+  //       getAccounts().then((data) => {
+  //           setSigner(data);
+  //           initializeClient();
+  //         });
+  //   }
+  // }, [web3authSFAuth, getAccounts]);
+  
+  // const handleCreateAttestation = async () => {
+  //   if (!signer) {
+  //     setError("Signer's address is not available.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const result = await createNotaryAttestation("Sample Contract Details", signer);
+  //     setAttestationResult(result);
+  //   } catch (err) {
+  //     setError('An error occurred while creating the attestation.');
+  //   }
+  // };
 
   return (
     <>
@@ -165,7 +236,11 @@ export const NavBar: React.FC = () => {
                     Connect Wallet
                   </p>
                 </div>
-              
+                {/* <div className="w-[146px] h-14 relative overflow-hidden rounded-[9px] bg-[#bafd02]" onClick={handleCreateAttestation}>
+                  <p className="absolute left-[22px] top-[13px] text-xl font-medium text-left text-black">
+                    Create Attestation
+                  </p>
+                </div> */}
               </>
             )
           ) : null}

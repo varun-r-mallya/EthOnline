@@ -1,52 +1,103 @@
 "use client";
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CarTaxiFront, User, Shield, ArrowLeft } from "lucide-react";
+import { CarTaxiFront, User, Shield } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Car, Security, Steering } from "@/components/svgs/choicePage";
-import { log } from "console";
-import {motion} from 'framer-motion'
+import { SignProtocolClient, SpMode, EvmChains } from "@ethsign/sp-sdk"; // Ensure these are imported correctly
 
 const RoleChoicePage = () => {
   const {
     web3authSFAuth,
     provider,
-    pkPlugin,
-    wsPlugin,
-    isLoggingIn,
     initWeb3Auth,
-    onSuccess,
-    loginWithPasskey,
     getUserInfo,
-    logout,
     getAccounts,
-    getBalance,
-    signMessage,
-    sendTransaction,
-    authenticateUser,
-    addChain,
-    switchChain,
-    registerPasskey,
-    listAllPasskeys,
-    showCheckout,
-    showWalletUI,
-    showWalletScanner,
   } = useAppStore();
 
   const [userInfo, setUserInfo] = useState<any>();
+  const [signer, setSigner] = useState<string | null>(null);
+  const [attestationResult, setAttestationResult] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  let signProtocolClient: SignProtocolClient | null = null;
+
+  // Initialize Web3Auth and fetch user info
   useEffect(() => {
     initWeb3Auth();
-  }, []);
+    if (web3authSFAuth) {
+      getUserInfo().then((info) => setUserInfo(info));
+    }
+  }, [web3authSFAuth, initWeb3Auth]);
 
+  // Initialize SignProtocolClient when web3auth and provider are available
+  const initializeClient = async () => {
+    if (web3authSFAuth && provider) {
+      signProtocolClient = new SignProtocolClient(SpMode.OnChain, {
+        chain: EvmChains.sepolia,
+        account: undefined,
+      });
+    } else {
+      console.error("Web3Auth or provider is not initialized.");
+    }
+  };
+
+  // Create attestation function
+  const create = async (contractDetails: string, signer: string) => {
+    if (!signProtocolClient) {
+      console.error("SignProtocolClient is not initialized.");
+      return;
+    }
+
+    try {
+      const res = await signProtocolClient.createAttestation({
+        schemaId: "0x1c6",
+        data: {
+          contractDetails,
+          signer,
+        },
+        indexingValue: signer.toLowerCase(),
+      });
+      console.log("Attestation created:", res);
+      return res;
+    } catch (error) {
+      console.error("Error creating attestation:", error);
+      throw new Error("Failed to create attestation");
+    }
+  };
+
+  // Call createAttestation when page loads
   useEffect(() => {
     if (web3authSFAuth) {
-      getUserInfo().then((info) => {
-        setUserInfo(info);
+      getAccounts().then((data) => {
+        setSigner(data[0]); // Ensure signer is fetched correctly
+        initializeClient();
       });
     }
-  }, [web3authSFAuth]);
+  }, [web3authSFAuth, getAccounts]);
+
+  // Handle attestation creation
+  const handleCreateAttestation = async () => {
+    if (!signer) {
+      setError("Signer's address is not available.");
+      return;
+    }
+
+    try {
+      const result = await create("Sample Contract Details", signer);
+      setAttestationResult(result);
+    } catch (err) {
+      setError("An error occurred while creating the attestation.");
+    }
+  };
+
+  // Automatically trigger the attestation creation on page load
+  useEffect(() => {
+    if (signer) {
+      handleCreateAttestation();
+    }
+  }, [signer]);
 
   return (
     <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center space-y-12">
