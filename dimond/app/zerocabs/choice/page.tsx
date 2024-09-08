@@ -7,7 +7,8 @@ import { useAppStore } from "@/store/useAppStore";
 import { useEffect, useState } from "react";
 import { Car, Security, Steering } from "@/components/svgs/choicePage";
 import { log } from "console";
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
+import Web3 from 'web3';
 
 const RoleChoicePage = () => {
   const {
@@ -105,11 +106,11 @@ const RoleChoicePage = () => {
         </CardContent>
       </Card> */}
       <div className="flex justify-start items-start gap-[19px]">
-      <motion.div
-            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
-            whileHover={{ scale: 1.05, translateY: -10 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+        <motion.div
+          className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+          whileHover={{ scale: 1.05, translateY: -10 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <a href="/zerocabs/rider">
             <div
               className="flex flex-col justify-start items-center gap-2"
@@ -127,13 +128,13 @@ const RoleChoicePage = () => {
               Request a ride to your destination.
             </p></a>
         </motion.div>
-   
+
 
         <motion.div
-            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
-            whileHover={{ scale: 1.05, translateY: -10 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+          className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+          whileHover={{ scale: 1.05, translateY: -10 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <a href="/zerocabs/driver">
 
             <div
@@ -153,10 +154,10 @@ const RoleChoicePage = () => {
         </motion.div>
 
         <motion.div
-            className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
-            whileHover={{ scale: 1.05, translateY: -10 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
+          className="cursor-pointer flex flex-col justify-center items-center h-[250px]  w-[258px] relative gap-[7px] px-[13px] py-[17px] rounded-[11px] bg-gradient-to-b from-[#1b211f] to-[#101517]"
+          whileHover={{ scale: 1.05, translateY: -10 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
           <a href="/zerocabs/responder">
 
             <div
