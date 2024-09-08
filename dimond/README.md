@@ -127,4 +127,6 @@ This project is a decentralized taxi service that empowers riders to request rid
 
 - **Custom Neural Network Architecture**: We plan to develop a custom neural network architecture for predictive pricing of rides. This model will analyze various factors, including historical ride data, demand patterns, and location-based metrics, to provide dynamic and accurate fare predictions.
 
+![image](https://github.com/user-attachments/assets/1c24d0ed-8018-4e66-9417-133a0746eff4)
+
 
