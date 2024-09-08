@@ -14,7 +14,8 @@ import {
 import { Locate, MapPin, Pointer, PointerIcon } from "lucide-react";
 import L from "leaflet";
 import { renderToStaticMarkup } from "react-dom/server";
-
+import EmergencyButton from "./EmergencyButton";
+import AcceptEmergencyButton from "./AcceptEmergency";
 // const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
 // const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false }) as React.ComponentType<TileLayerProps>;
 // const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false }) as React.ComponentType<MarkerProps>;
@@ -117,6 +118,8 @@ const CurrentRideMapModal: React.FC<CurrentRideMapModalProps> = ({
             <strong>Rider:</strong> {rideData.rider}
           </div>
         </div>
+        <AcceptEmergencyButton rideId={0}/>
+        <EmergencyButton/>
         <div className="p-4 border-t flex justify-end">
           <button
             onClick={onClose}

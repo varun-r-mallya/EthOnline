@@ -218,7 +218,7 @@ contract DecentralizedRideHailing {
         revert("No ongoing ride found");
     }
 
-    function triggerEmergency(uint256 rideId) external onlyRider(rideId) {
+    function triggerEmergency(uint256 rideId) external {
         Emergency storage emergency = emergencies[rideId];
         emergency.ride = rides[rideId];
         emergency.isAccepted = false;
@@ -227,7 +227,7 @@ contract DecentralizedRideHailing {
         emit EmergencyTriggered(rideId, msg.sender);
     }
 
-    function acceptEmergency(uint256 rideId) external onlyResponder {
+    function acceptEmergency(uint256 rideId) external  {
         Emergency storage emergency = emergencies[rideId];
         require(!emergency.isAccepted, "Emergency already accepted");
 
@@ -237,7 +237,7 @@ contract DecentralizedRideHailing {
         emit EmergencyAccepted(rideId, msg.sender);
     }
 
-    function completeEmergency(uint256 rideId) external onlyRider(rideId) {
+    function completeEmergency(uint256 rideId) external {
         Emergency storage emergency = emergencies[rideId];
         require(
             emergency.isAccepted,
@@ -245,7 +245,20 @@ contract DecentralizedRideHailing {
         );
 
         emergency.isCompleted = true;
-
+        
         emit EmergencyCompleted(rideId, msg.sender);
+    }
+     function getAllEmergencies() external view returns (Emergency[] memory) {
+        Emergency[] memory allEmergencies = new Emergency[](rideCounter);
+        uint256 counter = 0;
+        
+        for (uint256 i = 1; i <= rideCounter; i++) {
+            if (emergencies[i].ride.rideId != 0) {
+                allEmergencies[counter] = emergencies[i];
+                counter++;
+            }
+        }
+        
+        return allEmergencies;
     }
 }

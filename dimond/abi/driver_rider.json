@@ -38,6 +38,66 @@
 		"type": "event"
 	},
 	{
+<<<<<<< Updated upstream
+=======
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "responder",
+				"type": "address"
+			}
+		],
+		"name": "EmergencyAccepted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "EmergencyCompleted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "EmergencyTriggered",
+		"type": "event"
+	},
+	{
+>>>>>>> Stashed changes
 		"anonymous": false,
 		"inputs": [
 			{
@@ -207,7 +267,24 @@
 				"type": "uint256"
 			}
 		],
+<<<<<<< Updated upstream
 		"name": "acceptRide",
+=======
+		"name": "acceptEmergency",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			}
+		],
+		"name": "completeEmergency",
+>>>>>>> Stashed changes
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -316,6 +393,126 @@
 	{
 		"inputs": [
 			{
+<<<<<<< Updated upstream
+=======
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "emergencies",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "rideId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "driver",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "rider",
+						"type": "address"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "startLocation",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "endLocation",
+						"type": "tuple"
+					},
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "lat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "long",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Location",
+						"name": "currentLocation",
+						"type": "tuple"
+					},
+					{
+						"internalType": "uint256",
+						"name": "fare",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCompleted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAccepted",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Ride",
+				"name": "ride",
+				"type": "tuple"
+			},
+			{
+				"internalType": "address",
+				"name": "emergencyResponder",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isCompleted",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAccepted",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+>>>>>>> Stashed changes
 				"internalType": "address",
 				"name": "rider",
 				"type": "address"
@@ -332,6 +529,127 @@
 		"type": "function"
 	},
 	{
+<<<<<<< Updated upstream
+=======
+		"inputs": [],
+		"name": "getAllEmergencies",
+		"outputs": [
+			{
+				"components": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "rideId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "driver",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "rider",
+								"type": "address"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "lat",
+										"type": "string"
+									},
+									{
+										"internalType": "string",
+										"name": "long",
+										"type": "string"
+									}
+								],
+								"internalType": "struct DecentralizedRideHailing.Location",
+								"name": "startLocation",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "lat",
+										"type": "string"
+									},
+									{
+										"internalType": "string",
+										"name": "long",
+										"type": "string"
+									}
+								],
+								"internalType": "struct DecentralizedRideHailing.Location",
+								"name": "endLocation",
+								"type": "tuple"
+							},
+							{
+								"components": [
+									{
+										"internalType": "string",
+										"name": "lat",
+										"type": "string"
+									},
+									{
+										"internalType": "string",
+										"name": "long",
+										"type": "string"
+									}
+								],
+								"internalType": "struct DecentralizedRideHailing.Location",
+								"name": "currentLocation",
+								"type": "tuple"
+							},
+							{
+								"internalType": "uint256",
+								"name": "fare",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isCompleted",
+								"type": "bool"
+							},
+							{
+								"internalType": "bool",
+								"name": "isAccepted",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct DecentralizedRideHailing.Ride",
+						"name": "ride",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address",
+						"name": "emergencyResponder",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "isCompleted",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAccepted",
+						"type": "bool"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Emergency[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+>>>>>>> Stashed changes
 		"inputs": [],
 		"name": "getCurrentRide",
 		"outputs": [
@@ -615,6 +933,22 @@
 	{
 		"inputs": [
 			{
+<<<<<<< Updated upstream
+=======
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
+			}
+		],
+		"name": "triggerEmergency",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+>>>>>>> Stashed changes
 				"internalType": "address",
 				"name": "driverAddress",
 				"type": "address"

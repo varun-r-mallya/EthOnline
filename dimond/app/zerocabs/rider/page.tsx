@@ -12,6 +12,7 @@ import { Location as TypeLocation, Ride } from "@/lib/types";
 import LocationPicker from "@/components/basic/LocationPicker";
 import CurrentRideMapModal from "@/components/basic/LocationTracker";
 import { getVehicleLoc } from "@/store/getVehicledata";
+import EmergencyButton from "@/components/basic/EmergencyButton";
 
 export const getLocationString = async (location: TypeLocation) => {
   //[TODO ] get the location string from the location object

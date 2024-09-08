@@ -31,10 +31,14 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
   const { provider, initWeb3Auth } = useAppStore();
 
   const contractABI = abi;
+<<<<<<< Updated upstream
   //const contractAddress = '0xb92297Fc47A5088401473CdCa7aae4E3D08e70B6';
   // const contractAddress = '0x03B60f39fB6A1B907423C40A313151405955015A';
   // const contractAddress = '0x37f79023ce6E8dBb5DAcDc77b36dB95b96090223';
   const contractAddress = '0x0A9fB3196cD4b4B3252c61A33a011d4b4C8c0921'
+=======
+  const contractAddress = '0x6190ED091106B96EAb118988469512A5ea2d9014';
+>>>>>>> Stashed changes
 
   // Connect to MetaMask wallet
   const connectWallet = async () => {
