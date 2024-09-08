@@ -1,16 +1,12 @@
-import { ReactElement, useEffect } from "react";
-import Button from "../components/Button";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useClient, useSetClient } from "../hooks/useClient";
 import { Wallet } from "ethers";
 import { Client } from "@xmtp/xmtp-js";
-import "@rainbow-me/rainbowkit/styles.css";
-import {
-  AttachmentCodec,
-  RemoteAttachmentCodec,
-} from "@xmtp/content-type-remote-attachment";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { MessageSquare } from "lucide-react";
 
-export default function LoginView(): ReactElement {
+export default function LoginView() {
   const setClient = useSetClient();
 
   async function generateWallet() {
@@ -26,30 +22,23 @@ export default function LoginView(): ReactElement {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12">
-      <div className="mx-auto max-w-3xl"></div>
-      <div className="bg-white shadow sm:rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <h3 className="text-base font-semibold leading-6 text-gray-900">
-            Login
-          </h3>
-          <div className="mt-2 max-w-xl text-sm text-gray-500">
-            <p>You can generate a wallet or connect your own.</p>
-          </div>
-          <div className="mt-5 flex space-x-4">
-            <Button
-              type="button"
-              onClick={generateWallet}
-              className="rounded-lg"
-            >
-              Generate Wallet
-            </Button>
-            <div className="connect-button">
-              <ConnectButton />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 text-gray-100 z-1000">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold">Welcome</CardTitle>
+          <CardDescription>Start chatting with your driver or rider</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-gray-400 mb-4">
+            Connect securely and begin your conversation right away.
+          </p>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full" onClick={generateWallet}>
+            <MessageSquare className="mr-2 h-4 w-4" /> Start Chatting
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }

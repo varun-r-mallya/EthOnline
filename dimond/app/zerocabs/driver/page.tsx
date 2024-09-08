@@ -327,12 +327,14 @@ const DriverPage = () => {
           </div>
         </div>
         <div className="flex justify-start items-center w-[529px] h-[65px] relative gap-2.5 px-[35px] py-2 rounded-tl-2xl rounded-tr-2xl bg-gradient-to-b from-[#1b211f] to-[#101517]">
+          <a href="/messaging">
           <div className="flex justify-start items-center flex-grow relative gap-5 px-[19px] py-[9px]">
             <Chat />
             <p className="flex-grow-0 flex-shrink-0 text-xl text-center text-white">
               Your messages
             </p>
           </div>
+          </a>
           <svg
             width={18}
             height={11}

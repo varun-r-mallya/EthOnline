@@ -1,22 +1,23 @@
-import { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Conversation, Message } from "../model/db";
 import { useMessages } from "../hooks/useMessages";
-import MessageComposerView from "./MessageComposerView";
-import MessageCellView from "./MessageCellView";
-import { Link } from "react-router-dom";
-import Header from "../components/Header";
-import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { useLiveConversation } from "../hooks/useLiveConversation";
-import ConversationSettingsView from "./ConversationSettingsView";
+import { useReadReceipts } from "../hooks/useReadReceipts";
 import { ContentTypeId } from "@xmtp/xmtp-js";
 import { ContentTypeReaction } from "@xmtp/content-type-reaction";
-import { useReadReceipts } from "../hooks/useReadReceipts";
+import MessageComposerView from "./MessageComposerView";
+import MessageCellView from "./MessageCellView";
+import ConversationSettingsView from "./ConversationSettingsView";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Settings, ArrowLeft } from "lucide-react";
 
 const appearsInMessageList = (message: Message): boolean => {
   if (ContentTypeReaction.sameAs(message.contentType as ContentTypeId)) {
     return false;
   }
-
   return true;
 };
 
@@ -24,70 +25,85 @@ export default function ConversationView({
   conversation,
 }: {
   conversation: Conversation;
-}): ReactElement {
+}) {
   const liveConversation = useLiveConversation(conversation);
-
   const messages = useMessages(conversation);
-
   const showReadReceipt = useReadReceipts(conversation);
-
   const [isShowingSettings, setIsShowingSettings] = useState(false);
 
   useEffect(() => {
-    window.scrollTo({ top: 100000, behavior: "smooth" });
+    const scrollArea = document.getElementById("message-scroll-area");
+    if (scrollArea) {
+      scrollArea.scrollTop = scrollArea.scrollHeight;
+    }
   }, [messages?.length]);
 
   return (
-    <div className="p-4 pb-20 pt-14">
-      <Header>
-        <div className="flex justify-between font-bold">
-          <span className="flex-grow">
+    <div className="h-screen flex flex-col bg-black dark:bg-gray-900 z-100">
+      <Card className="flex-grow flex flex-col m-4 overflow-hidden bg-gray-800">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle className="text-2xl font-bold text-white">
             {liveConversation?.title || conversation.peerAddress}
-          </span>
-          <div className="space-x-4">
-            <button
-              className="inline-block space-x-1 text-zinc-600"
-              onClick={() => {
-                setIsShowingSettings(!isShowingSettings);
-              }}
+          </CardTitle>
+          <div className="flex space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsShowingSettings(!isShowingSettings)}
             >
-              <Cog6ToothIcon className="h-4 inline-block align-top" />
-              <span>Settings</span>
-            </button>
-            <Link className="text-blue-700" to="/">
-              Go Back
+              <Settings className="h-4 w-4 mr-2" />
+              Settings
+            </Button>
+            <Link to="/">
+              <Button variant="outline" size="sm">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
             </Link>
           </div>
-        </div>
+        </CardHeader>
         {isShowingSettings && (
           <ConversationSettingsView
             conversation={conversation}
             dismiss={() => setIsShowingSettings(false)}
           />
         )}
-      </Header>
-      <div>
-        {messages?.length == 0 && <p>No messages yet.</p>}
-        {messages ? (
-          messages.reduce((acc: ReactElement[], message: Message, index) => {
-            const showRead = showReadReceipt && index === messages.length - 1;
-            if (appearsInMessageList(message)) {
-              acc.push(
-                <MessageCellView
-                  key={message.id}
-                  message={message}
-                  readReceiptText={showRead ? "Read" : undefined}
-                />
-              );
-            }
-
-            return acc;
-          }, [] as ReactElement[])
-        ) : (
-          <span>Could not load messages</span>
-        )}
-      </div>
-      <MessageComposerView conversation={conversation} />
+        <CardContent className="flex-grow p-0 overflow-hidden">
+          <ScrollArea className="h-full p-4" id="message-scroll-area">
+            {messages?.length === 0 && (
+              <p className="text-center text-gray-500 dark:text-gray-400 py-4">
+                No messages yet.
+              </p>
+            )}
+            {messages ? (
+              messages.reduce(
+                (acc: React.ReactElement[], message: Message, index) => {
+                  const showRead =
+                    showReadReceipt && index === messages.length - 1;
+                  if (appearsInMessageList(message)) {
+                    acc.push(
+                      <MessageCellView
+                        key={message.id}
+                        message={message}
+                        readReceiptText={showRead ? "Read" : undefined}
+                      />
+                    );
+                  }
+                  return acc;
+                },
+                []
+              )
+            ) : (
+              <p className="text-center text-red-500 dark:text-red-400 py-4">
+                Could not load messages
+              </p>
+            )}
+          </ScrollArea>
+        </CardContent>
+        <div className="p-4">
+          <MessageComposerView conversation={conversation} />
+        </div>
+      </Card>
     </div>
   );
 }

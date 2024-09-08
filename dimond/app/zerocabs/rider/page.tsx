@@ -315,6 +315,7 @@ const ClientPage = () => {
             </div>
           </div>
         </div>
+        <a href="/messaging">
         <div className="flex justify-start items-center w-[529px] h-[65px] relative gap-2.5 px-[35px] py-2 rounded-tl-2xl rounded-tr-2xl bg-gradient-to-b from-[#1b211f] to-[#101517]">
           {/* <div className="flex justify-start items-center flex-grow relative gap-5 px-[19px] py-[9px] cursor-pointer">
             <Chat />
@@ -338,6 +339,7 @@ const ClientPage = () => {
             />
           </svg>
         </div>
+        </a>
       </div>
     </div>
   );

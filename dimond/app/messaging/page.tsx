@@ -35,11 +35,11 @@ const router = createHashRouter([
 ]);
 const Messaging = () => {
   return (
-    <ClientProvider>
-      <WalletContext>
-        <RouterProvider router={router} />
-      </WalletContext>
-    </ClientProvider>
+      <ClientProvider>
+        <WalletContext>
+          <RouterProvider router={router} />
+        </WalletContext>
+      </ClientProvider>
   );
 };
 export default Messaging;

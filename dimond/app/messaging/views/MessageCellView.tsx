@@ -104,7 +104,7 @@ export default function MessageCellView({
   readReceiptText: string | undefined;
 }): ReactElement {
   return (
-    <div className="flex">
+    <div className="flex text-white">
       <span
         title={message.sentByMe ? "You" : message.senderAddress}
         className={message.sentByMe ? "text-zinc-500" : "text-green-500"}

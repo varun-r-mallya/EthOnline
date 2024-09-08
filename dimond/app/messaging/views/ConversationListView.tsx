@@ -22,7 +22,7 @@ export default function ConversationListView(): ReactElement {
   }, [readReceiptsEnabled]);
 
   return (
-    <div>
+    <div className="text-black">
       <button
         onClick={() => setReadReceiptsEnabled(!readReceiptsEnabled)}
         className="bg-blue-100 p-1 my-2 text-xs"
