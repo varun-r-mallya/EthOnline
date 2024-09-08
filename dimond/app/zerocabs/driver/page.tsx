@@ -8,6 +8,7 @@ import Chat from "@/components/svgs/Chat";
 import { Web3Context } from "@/store/context/web3context";
 import { get } from "http";
 import { getVehicleLoc } from "@/store/getVehicledata";
+import { useRouter } from "next/router";
 
 const DriverPage = () => {
   const [isOnline, setIsOnline] = React.useState(false);
@@ -23,7 +24,6 @@ const DriverPage = () => {
     fare: 0,
   });
   const { account, contract, connectWallet } = useContext(Web3Context);
-
   useEffect(() => {
     let subscription: any;
   
@@ -73,7 +73,20 @@ const DriverPage = () => {
         });
       }
     };
-  }, [account, contract]); // Add contract to the dependency array
+  }, [account, contract]);
+  
+  useEffect(() => {
+    if (contract && account) {
+      const fetchRides = async () => {
+        const currentRide = await contract.methods.getCurrentRide().call({ from: account });
+        setCurrentRide(currentRide);
+      };
+  
+      fetchRides();
+    }
+  }
+  , [contract, account]);
+
   const getAllRides = () => {
     console.log("Getting all rides");
   };
@@ -94,6 +107,7 @@ const DriverPage = () => {
   };
   const acceptRide=()=>{
     console.log("Accepting Ride");
+
     //[TODO] Add logic to accept the ride 
 
   }

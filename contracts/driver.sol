@@ -29,6 +29,7 @@ contract DecentralizedRideHailing {
         Location currentLocation;
         uint256 fare;
         bool isCompleted;
+        bool isAccepted;
     }
     
     struct Emergency {
@@ -45,7 +46,6 @@ contract DecentralizedRideHailing {
     mapping(uint256 => Emergency) public emergencies; // Add this line to define the mapping
     uint256 public rideCounter;
 
-    // Events
     event DriverRegistered(address indexed driver);
     event RiderRegistered(address indexed rider);
     event RideRequested(address indexed rider, address[] nearbyDrivers);
@@ -106,10 +106,20 @@ contract DecentralizedRideHailing {
         emit RideRequested(msg.sender, nearbyDrivers);
     }
 
-    function acceptRide(address rider) external onlyKYCVerified(msg.sender) {
+ function acceptRide(uint256 rideId) external {
         require(drivers[msg.sender].isAvailable, "Driver is not available");
+
+        Ride storage ride = rides[rideId];
+
+        require(ride.driver == msg.sender, "Only the assigned driver can accept this ride");
+        require(!ride.isAccepted, "Ride already accepted");
+
+        
+        ride.isAccepted = true;
         drivers[msg.sender].isAvailable = false;
-        emit RideAccepted(msg.sender, rider);
+
+        
+        emit RideAccepted(msg.sender, ride.rider);
     }
 
     function startRide(address rider) external {

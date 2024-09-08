@@ -1,70 +1,5 @@
 [
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "rider",
-				"type": "address"
-			}
-		],
-		"name": "acceptRide",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "driver",
-				"type": "address"
-			},
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "lat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "long",
-						"type": "string"
-					}
-				],
-				"internalType": "struct DecentralizedRideHailing.Location",
-				"name": "startLocation",
-				"type": "tuple"
-			},
-			{
-				"components": [
-					{
-						"internalType": "string",
-						"name": "lat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "long",
-						"type": "string"
-					}
-				],
-				"internalType": "struct DecentralizedRideHailing.Location",
-				"name": "endLocation",
-				"type": "tuple"
-			},
-			{
-				"internalType": "uint256",
-				"name": "fare",
-				"type": "uint256"
-			}
-		],
-		"name": "createRide",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -101,69 +36,6 @@
 		],
 		"name": "DriverReviewed",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "rider",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "fare",
-				"type": "uint256"
-			}
-		],
-		"name": "endRide",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "attestation",
-				"type": "string"
-			}
-		],
-		"name": "registerDriver",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "registerRider",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "requestRide",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "driver",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "rating",
-				"type": "uint256"
-			}
-		],
-		"name": "reviewDriver",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -330,12 +202,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "rider",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "rideId",
+				"type": "uint256"
 			}
 		],
-		"name": "startRide",
+		"name": "acceptRide",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -344,11 +216,50 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "driverAddress",
+				"name": "driver",
 				"type": "address"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "startLocation",
+				"type": "tuple"
+			},
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "lat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "long",
+						"type": "string"
+					}
+				],
+				"internalType": "struct DecentralizedRideHailing.Location",
+				"name": "endLocation",
+				"type": "tuple"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
 			}
 		],
-		"name": "verifyDriverKYC",
+		"name": "createRide",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -364,14 +275,19 @@
 		"name": "drivers",
 		"outputs": [
 			{
+				"internalType": "string",
+				"name": "gID",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "driverAddress",
 				"type": "address"
 			},
 			{
-				"internalType": "string",
+				"internalType": "bool",
 				"name": "attestation",
-				"type": "string"
+				"type": "bool"
 			},
 			{
 				"internalType": "bool",
@@ -395,6 +311,24 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "fare",
+				"type": "uint256"
+			}
+		],
+		"name": "endRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -478,6 +412,11 @@
 						"internalType": "bool",
 						"name": "isCompleted",
 						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAccepted",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct DecentralizedRideHailing.Ride",
@@ -486,6 +425,51 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "gID",
+				"type": "string"
+			}
+		],
+		"name": "registerDriver",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "registerRider",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "requestRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "driver",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "rating",
+				"type": "uint256"
+			}
+		],
+		"name": "reviewDriver",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -605,9 +589,40 @@
 				"internalType": "bool",
 				"name": "isCompleted",
 				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAccepted",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "rider",
+				"type": "address"
+			}
+		],
+		"name": "startRide",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "driverAddress",
+				"type": "address"
+			}
+		],
+		"name": "verifyDriverKYC",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

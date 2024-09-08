@@ -1,3 +1,4 @@
+"use client"
 import { useAppStore } from "@/store/useAppStore";
 import { CarFront, Menu, Wallet } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -108,12 +109,12 @@ export const NavBar: React.FC = () => {
             </div>
           ) : (
             <div
-              className="w-[146px] h-14 overflow-hidden rounded-[9px] bg-[#bafd02] items-center flex justify-center cursor-pointer  z-10"
+              className="w-[146px] h-14 overflow-hidden rounded-[9px] bg-[#bafd02] items-center flex justify-center cursor-pointer z-100"
               onClick={connectWallet}
             >
               <button
                 onClick={handleConnect}
-                className="  text-xl font-medium text-left text-black"
+                className="  text-xl font-medium text-left text-black z-10"
               >
                 Connect Wallet
               </button>
